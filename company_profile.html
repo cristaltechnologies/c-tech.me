@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cristal Technologies — Company Profile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ── RESET & ROOT ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+:root {
+  --teal:       #0b7b74;
+  --teal-dark:  #085e58;
+  --teal-deep:  #103836;
+  --lime:       #b8c400;
+  --lime-dim:   #96a200;
+  --ink:        #163533;
+  --ink2:       #2d4a47;
+  --muted:      #617975;
+  --rule:       rgba(22,53,51,.10);
+  --rule2:      rgba(22,53,51,.06);
+  --bg:         #f6f8f8;
+  --surface:    #ffffff;
+  --surface-sm: #f1f5f4;
+  --serif:      'DM Serif Display', Georgia, serif;
+  --sans:       'DM Sans', system-ui, sans-serif;
+  --shadow:     0 16px 48px rgba(8,94,88,.10);
+  --r:          16px;
+}
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── PRINT BUTTON ─────────────────────────────────────────── */
+.print-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  background: var(--teal);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 12px 24px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(11,123,116,.35);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 999;
+  transition: background .2s, transform .2s;
+}
+.print-btn:hover { background: var(--teal-dark); transform: translateY(-2px); }
+
+/* ── NAV ──────────────────────────────────────────────────── */
+.nav {
+  background: var(--teal-deep);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 2px solid var(--lime);
+}
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 32px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.nav-logo {
+  width: 34px; height: 34px;
+  background: var(--teal);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 13px; color: white; letter-spacing: -.5px;
+}
+.nav-name { font-weight: 600; font-size: 15px; color: white; }
+.nav-sub  { font-size: 10px; color: rgba(255,255,255,.55); letter-spacing: .06em; }
+.nav-links { display: flex; gap: 4px; }
+.nav-links a {
+  color: rgba(255,255,255,.65);
+  text-decoration: none;
+  font-size: 13px;
+  padding: 6px 14px;
+  border-radius: 6px;
+  transition: .15s;
+}
+.nav-links a:hover { color: white; background: rgba(255,255,255,.08); }
+.nav-cta {
+  background: var(--lime) !important;
+  color: var(--ink) !important;
+  font-weight: 600 !important;
+}
+.nav-cta:hover { background: var(--lime-dim) !important; }
+
+/* ── HERO ─────────────────────────────────────────────────── */
+.hero {
+  background: var(--teal-deep);
+  padding: 0 32px;
+  overflow: hidden;
+  position: relative;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 80% 20%, rgba(11,123,116,.35), transparent 55%),
+    radial-gradient(ellipse at 10% 80%, rgba(184,196,0,.12), transparent 50%);
+  pointer-events: none;
+}
+.hero-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 80px 0 72px;
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 60px;
+  align-items: center;
+  position: relative;
+}
+.hero-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--lime);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-eyebrow::before {
+  content: "";
+  width: 32px; height: 2px;
+  background: linear-gradient(90deg, var(--lime), var(--teal));
+  border-radius: 999px;
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  color: white;
+  line-height: 1.08;
+  letter-spacing: -.02em;
+  margin-bottom: 20px;
+}
+.hero h1 em { color: var(--lime); font-style: normal; }
+.hero-sub {
+  font-size: 16px;
+  color: rgba(255,255,255,.65);
+  line-height: 1.75;
+  max-width: 520px;
+  margin-bottom: 36px;
+}
+.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-lime {
+  background: var(--lime);
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 13.5px;
+  font-weight: 600;
+  padding: 12px 26px;
+  border-radius: 999px;
+  transition: .2s;
+}
+.btn-lime:hover { background: var(--lime-dim); }
+.btn-ghost {
+  background: rgba(255,255,255,.08);
+  color: rgba(255,255,255,.8);
+  text-decoration: none;
+  font-size: 13.5px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.18);
+  transition: .2s;
+}
+.btn-ghost:hover { background: rgba(255,255,255,.14); color: white; }
+
+/* Hero panel */
+.hero-panel {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: var(--r);
+  padding: 28px;
+  backdrop-filter: blur(12px);
+}
+.hero-panel-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--lime);
+  margin-bottom: 16px;
+}
+.hero-fact {
+  display: flex;
+  gap: 12px;
+  padding: 11px 0;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  align-items: flex-start;
+}
+.hero-fact:last-child { border-bottom: none; }
+.fact-dot {
+  width: 6px; height: 6px;
+  background: var(--lime);
+  border-radius: 50%;
+  margin-top: 7px;
+  flex-shrink: 0;
+}
+.fact-text { font-size: 13.5px; color: rgba(255,255,255,.72); line-height: 1.5; }
+
+/* ── STATS BAR ────────────────────────────────────────────── */
+.stats-bar {
+  background: var(--teal-deep);
+  border-top: 1px solid rgba(255,255,255,.06);
+  border-bottom: 2px solid rgba(184,196,0,.3);
+}
+.stats-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.stat-item {
+  padding: 24px 20px;
+  border-right: 1px solid rgba(255,255,255,.07);
+  text-align: center;
+}
+.stat-item:last-child { border-right: none; }
+.stat-val {
+  font-family: var(--serif);
+  font-size: 2rem;
+  color: var(--lime);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.stat-lbl { font-size: 11px; color: rgba(255,255,255,.5); letter-spacing: .04em; }
+
+/* ── CONTAINER ────────────────────────────────────────────── */
+.container { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+
+/* ── SECTION ──────────────────────────────────────────────── */
+.section { padding: 80px 0; }
+.section-sm { padding: 56px 0; }
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 14px;
+}
+.eyebrow::before {
+  content: "";
+  width: 28px; height: 2px;
+  background: linear-gradient(90deg, var(--teal), var(--lime));
+  border-radius: 999px;
+}
+
+h2.section-title {
+  font-family: var(--serif);
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  color: var(--ink);
+  line-height: 1.15;
+  letter-spacing: -.02em;
+  margin-bottom: 10px;
+  max-width: 680px;
+}
+
+.section-sub {
+  font-size: 15px;
+  color: var(--muted);
+  max-width: 580px;
+  margin-bottom: 44px;
+}
+
+/* ── OVERVIEW ─────────────────────────────────────────────── */
+.overview-grid {
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 32px;
+  align-items: start;
+}
+.overview-body p { color: var(--ink2); font-size: 15px; line-height: 1.8; margin-bottom: 14px; }
+
+.vm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 28px; border-radius: var(--r); overflow: hidden; box-shadow: var(--shadow); }
+.vm-card { padding: 28px 24px; }
+.vm-card:nth-child(1) { background: var(--teal-dark); }
+.vm-card:nth-child(2) { background: var(--teal); }
+.vm-card h3 { font-family: var(--serif); font-size: 18px; color: white; margin-bottom: 10px; }
+.vm-card p  { font-size: 13.5px; color: rgba(255,255,255,.72); line-height: 1.65; }
+
+.pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: var(--r); overflow: hidden; }
+.pillar { background: var(--surface); padding: 22px 20px; }
+.pillar-icon { width: 36px; height: 36px; background: rgba(11,123,116,.08); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+.pillar-icon svg { width: 18px; height: 18px; stroke: var(--teal); fill: none; stroke-width: 1.5; }
+.pillar h4 { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+.pillar p  { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+/* ── SOLUTIONS ────────────────────────────────────────────── */
+.solutions-bg { background: var(--teal-deep); }
+.solutions-bg .eyebrow { color: var(--lime); }
+.solutions-bg .eyebrow::before { background: linear-gradient(90deg, var(--lime), var(--teal)); }
+.solutions-bg h2.section-title { color: white; }
+.solutions-bg .section-sub { color: rgba(255,255,255,.55); }
+
+.service-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.service-card {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: var(--r);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform .2s, box-shadow .2s;
+}
+.service-card:hover { transform: translateY(-4px); box-shadow: 0 20px 48px rgba(0,0,0,.25); }
+.sc-header {
+  padding: 20px 22px 16px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.sc-icon {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.sc-title { font-family: var(--serif); font-size: 18px; color: white; line-height: 1.2; }
+.sc-body { padding: 18px 22px; flex: 1; }
+.sc-body ul { list-style: none; display: grid; gap: 0; }
+.sc-body li {
+  font-size: 13px;
+  color: rgba(255,255,255,.62);
+  padding: 6px 0 6px 16px;
+  position: relative;
+  border-bottom: 1px solid rgba(255,255,255,.05);
+}
+.sc-body li:last-child { border-bottom: none; }
+.sc-body li::before { content: "→"; position: absolute; left: 0; color: var(--lime); font-size: 11px; top: 7px; }
+
+.card-teal   .sc-header { background: var(--teal); }
+.card-teal   .sc-icon   { color: rgba(255,255,255,.7); }
+.card-dark   .sc-header { background: var(--teal-dark); }
+.card-dark   .sc-icon   { color: rgba(255,255,255,.7); }
+.card-lime   .sc-header { background: linear-gradient(135deg, var(--teal-dark), #2a5c00); }
+.card-lime   .sc-icon   { color: var(--lime); }
+
+/* Packages strip */
+.pkg-strip {
+  margin-top: 32px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: var(--r);
+  overflow: hidden;
+}
+.pkg-strip-header {
+  background: rgba(184,196,0,.12);
+  border-bottom: 1px solid rgba(184,196,0,.2);
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.pkg-strip-header span {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--lime);
+}
+.pkg-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+}
+.pkg-item {
+  padding: 18px 16px;
+  border-right: 1px solid rgba(255,255,255,.06);
+}
+.pkg-item:last-child { border-right: none; }
+.pkg-name  { font-size: 12px; font-weight: 600; color: white; margin-bottom: 4px; }
+.pkg-price { font-family: var(--serif); font-size: 16px; color: var(--lime); margin-bottom: 2px; }
+.pkg-dur   { font-size: 11px; color: rgba(255,255,255,.45); }
+.pkg-note  { font-size: 10px; color: rgba(255,255,255,.35); margin-top: 4px; font-style: italic; }
+
+/* ── CLIENTS ──────────────────────────────────────────────── */
+.industry-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 48px; }
+.ind-card {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--teal);
+  border-radius: 0 0 var(--r) var(--r);
+  padding: 20px;
+}
+.ind-card h4 { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+.ind-card p  { font-size: 13px; color: var(--muted); line-height: 1.55; }
+
+.logo-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: var(--r);
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+.logo-cell {
+  background: var(--surface);
+  padding: 18px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 62px;
+  transition: background .15s;
+}
+.logo-cell:hover { background: rgba(11,123,116,.05); }
+.logo-cell img {
+  max-width: 90px;
+  max-height: 36px;
+  object-fit: contain;
+  filter: grayscale(80%) opacity(.65);
+  transition: filter .2s;
+}
+.logo-cell:hover img { filter: grayscale(0%) opacity(1); }
+.logo-cell-text {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.3;
+}
+
+/* Testimonial */
+.testi-band {
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  background: var(--teal-deep);
+  border-radius: var(--r);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.testi-quote {
+  padding: 36px 40px;
+  border-right: 1px solid rgba(255,255,255,.08);
+}
+.testi-mark {
+  font-family: var(--serif);
+  font-size: 56px;
+  color: var(--lime);
+  line-height: .6;
+  margin-bottom: 16px;
+  opacity: .6;
+}
+.testi-quote blockquote {
+  font-family: var(--serif);
+  font-size: 17px;
+  color: white;
+  line-height: 1.65;
+  font-style: italic;
+  margin-bottom: 16px;
+}
+.testi-quote cite { font-size: 12.5px; color: rgba(255,255,255,.55); font-style: normal; }
+.testi-quote cite strong { color: rgba(255,255,255,.85); }
+.testi-badge {
+  padding: 36px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: rgba(184,196,0,.08);
+}
+.testi-badge .badge-label { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--lime); margin-bottom: 10px; }
+.testi-badge .badge-val   { font-family: var(--serif); font-size: 28px; color: white; margin-bottom: 6px; }
+.testi-badge .badge-sub   { font-size: 12px; color: rgba(255,255,255,.5); }
+
+/* ── CONTACT ──────────────────────────────────────────────── */
+.contact-bg { background: var(--surface-sm); }
+.contact-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 40px; }
+.contact-methods { display: grid; gap: 12px; }
+.contact-method {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 16px 18px;
+}
+.method-icon {
+  width: 38px; height: 38px;
+  background: rgba(11,123,116,.08);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.method-icon svg { width: 18px; height: 18px; stroke: var(--teal); fill: none; stroke-width: 1.5; }
+.method-label { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+.method-val { font-size: 14px; color: var(--ink); font-weight: 500; }
+.method-val a { color: var(--teal); text-decoration: none; }
+.method-val a:hover { text-decoration: underline; }
+
+.map-wrap {
+  border-radius: var(--r);
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  box-shadow: var(--shadow);
+}
+.map-wrap iframe { display: block; }
+.map-label {
+  background: var(--surface);
+  padding: 14px 18px;
+  border-top: 1px solid var(--rule);
+}
+.map-label strong { font-size: 13px; color: var(--ink); }
+.map-label span   { font-size: 12px; color: var(--muted); }
+
+/* CTA band */
+.cta-band {
+  background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+  padding: 48px 32px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(184,196,0,.15), transparent 65%);
+}
+.cta-band h2 {
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  color: white;
+  margin-bottom: 12px;
+  position: relative;
+}
+.cta-band p { color: rgba(255,255,255,.7); font-size: 15px; margin-bottom: 28px; position: relative; }
+.cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; position: relative; }
+
+/* Footer */
+.footer {
+  background: var(--teal-deep);
+  border-top: 1px solid rgba(255,255,255,.06);
+  padding: 32px;
+}
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.footer-brand { color: rgba(255,255,255,.8); font-size: 14px; font-weight: 600; }
+.footer-info  { font-size: 12px; color: rgba(255,255,255,.4); text-align: right; }
+.footer-info a { color: rgba(255,255,255,.55); text-decoration: none; }
+
+/* ── ANIMATIONS ───────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fadeUp .6s ease both; }
+.delay-1 { animation-delay: .1s; }
+.delay-2 { animation-delay: .2s; }
+.delay-3 { animation-delay: .3s; }
+
+/* ── RESPONSIVE ───────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .hero-inner, .overview-grid, .contact-grid, .testi-band { grid-template-columns: 1fr; }
+  .hero-panel { display: none; }
+  .service-cards { grid-template-columns: 1fr; }
+  .pkg-grid { grid-template-columns: repeat(2, 1fr); }
+  .logo-grid { grid-template-columns: repeat(3, 1fr); }
+  .industry-grid { grid-template-columns: 1fr 1fr; }
+  .stats-inner { grid-template-columns: repeat(2, 1fr); }
+  .vm-grid, .pillars { grid-template-columns: 1fr; }
+  .testi-badge { display: none; }
+  .nav-links { display: none; }
+}
+
+@media (max-width: 560px) {
+  .industry-grid, .logo-grid { grid-template-columns: repeat(2, 1fr); }
+  .stats-inner { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ── PRINT ────────────────────────────────────────────────── */
+@media print {
+  .print-btn, .nav { display: none; }
+  .section, .section-sm { padding: 40px 0; }
+  .hero { padding: 40px 32px; }
+  .hero-inner { grid-template-columns: 1fr; }
+  .service-cards { grid-template-columns: 1fr 1fr; }
+  body { font-size: 12px; }
+  @page { margin: 15mm 20mm; }
+}
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+  Save / Print PDF
+</button>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-brand">
+      <div class="nav-logo">CT</div>
+      <div>
+        <div class="nav-name">Cristal Technologies</div>
+        <div class="nav-sub">ERP • WMS • Business Intelligence</div>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="index.html" style="font-size:12px;opacity:.7">← c-tech.me</a>
+      <a href="#overview">Overview</a>
+      <a href="#solutions">Solutions</a>
+      <a href="#clients">Clients</a>
+      <a href="#contact" class="nav-cta">Contact Us</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow fade-up">Company Profile 2026</div>
+      <h1 class="fade-up delay-1">Senior. Independent.<br><em>Vendor-Neutral.</em></h1>
+      <p class="hero-sub fade-up delay-2">
+        Enterprise technology advisory for FMCG, distribution, financial services,
+        and healthcare trade businesses across the Gulf and Levant —
+        built on 40 years of hands-on delivery experience.
+      </p>
+      <div class="hero-btns fade-up delay-3">
+        <a href="#contact" class="btn-lime">Get in Touch</a>
+        <a href="#solutions" class="btn-ghost">Explore Solutions →</a>
+      </div>
+    </div>
+    <div class="hero-panel fade-up delay-2">
+      <div class="hero-panel-label">Why Cristal Technologies</div>
+      <div class="hero-fact"><div class="fact-dot"></div><div class="fact-text">40+ years of enterprise operations experience across FMCG, distribution, financial services, and healthcare trade</div></div>
+      <div class="hero-fact"><div class="fact-dot"></div><div class="fact-text">Zero vendor alignments — recommendations driven by your business requirements alone</div></div>
+      <div class="hero-fact"><div class="fact-dot"></div><div class="fact-text">Senior delivery — the consultant who scopes your project executes it</div></div>
+      <div class="hero-fact"><div class="fact-dot"></div><div class="fact-text">Fixed-price entry packages — clear scope, defined fee, no surprises</div></div>
+      <div class="hero-fact"><div class="fact-dot"></div><div class="fact-text">Based between Dubai and Beirut — deep Gulf and Levant regional knowledge</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item"><div class="stat-val">40+</div><div class="stat-lbl">Years enterprise experience</div></div>
+    <div class="stat-item"><div class="stat-val">20+</div><div class="stat-lbl">Client organisations served</div></div>
+    <div class="stat-item"><div class="stat-val">0</div><div class="stat-lbl">Vendor alignments</div></div>
+    <div class="stat-item"><div class="stat-val">2</div><div class="stat-lbl">Offices — Dubai & Beirut</div></div>
+  </div>
+</div>
+
+<!-- OVERVIEW -->
+<section class="section" id="overview">
+  <div class="container">
+    <div class="overview-grid">
+      <div class="overview-body">
+        <div class="eyebrow">Company Overview</div>
+        <h2 class="section-title">Who We Are</h2>
+        <p>Cristal Technologies is a specialist enterprise IT consultancy delivering senior, vendor-neutral advisory and hands-on implementation across Oracle &amp; Microsoft ERP, INFOR Warehouse Management Systems, and Business Intelligence platforms built on Power BI and Cognos.</p>
+        <p>Founded and led by Samir Harb, the practice is built on 40 years of enterprise operations experience. An FMCG domain expert with extensive B2B experience, Samir has worked with leading global brands including P&amp;G, Mars, Nestlé, and Clorox — bringing deep commercial and operational knowledge to every engagement.</p>
+        <p>Based between Dubai and Beirut, Cristal Technologies brings direct regional knowledge to every engagement, including deep familiarity with the regulatory and operational realities of the Gulf and Levant corridor.</p>
+
+        <div class="vm-grid">
+          <div class="vm-card">
+            <h3>Our Mission</h3>
+            <p>To deliver senior, vendor-neutral enterprise technology advisory that helps FMCG, distribution, financial services, and healthcare trade businesses across the Gulf and Levant achieve operational excellence.</p>
+          </div>
+          <div class="vm-card">
+            <h3>Our Approach</h3>
+            <p>Every engagement begins with the business problem — not the system. We work backwards from the outcome the client needs, delivered by the same senior consultant who scoped the project. No junior handoffs. No vendor agenda.</p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="eyebrow" style="margin-top:4px">Why Independent</div>
+        <h2 class="section-title" style="font-size:1.5rem;margin-bottom:20px">Four reasons clients choose us</h2>
+        <div class="pillars">
+          <div class="pillar">
+            <div class="pillar-icon">
+              <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <h4>No Vendor Alignment</h4>
+            <p>We are not a reseller or certified partner of any software vendor. Every recommendation is driven by your business requirements alone.</p>
+          </div>
+          <div class="pillar">
+            <div class="pillar-icon">
+              <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0"/></svg>
+            </div>
+            <h4>Senior Delivery</h4>
+            <p>The consultant who scopes your project executes it. No handoffs to junior teams. What you see in the proposal is what you get.</p>
+          </div>
+          <div class="pillar">
+            <div class="pillar-icon">
+              <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33"/></svg>
+            </div>
+            <h4>Fixed Prices</h4>
+            <p>Every engagement has a defined scope and fixed fee agreed before work starts. No open-ended billing, no scope creep surprises.</p>
+          </div>
+          <div class="pillar">
+            <div class="pillar-icon">
+              <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3"/></svg>
+            </div>
+            <h4>Regional Knowledge</h4>
+            <p>Dubai and Beirut based. Deep familiarity with UAE VAT, WPS, Lebanon regulatory requirements, and Gulf and Levant business culture.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTIONS -->
+<section class="section solutions-bg" id="solutions">
+  <div class="container">
+    <div class="eyebrow">Services & Solutions</div>
+    <h2 class="section-title">What We Deliver</h2>
+    <p class="section-sub" style="color:rgba(255,255,255,.55)">Three core practice areas, with deep expertise in Oracle JD Edwards, Microsoft Dynamics 365, INFOR WMS, Power BI, Cognos, and AI-powered Reporting Agents.</p>
+
+    <div class="service-cards">
+
+      <div class="service-card card-teal">
+        <div class="sc-header">
+          <div class="sc-icon">ERP — Oracle &amp; Microsoft</div>
+          <div class="sc-title">ERP Implementation</div>
+        </div>
+        <div class="sc-body">
+          <ul>
+            <li>Oracle JD Edwards — finance, supply chain, operations</li>
+            <li>Microsoft Dynamics 365 — mid-market to enterprise</li>
+            <li>Localisation for UAE VAT, WPS &amp; Lebanon statutory requirements</li>
+            <li>Data migration, process mapping &amp; go-live preparation</li>
+            <li>Post-go-live stabilisation and ERP Health Checks</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="service-card card-dark">
+        <div class="sc-header">
+          <div class="sc-icon">WMS — INFOR</div>
+          <div class="sc-title">Warehouse Management System</div>
+        </div>
+        <div class="sc-body">
+          <ul>
+            <li>INFOR WMS design for FMCG and distribution environments</li>
+            <li>Inbound, put-away, picking, replenishment &amp; dispatch</li>
+            <li>Cycle counting and inventory accuracy programmes</li>
+            <li>Integration with ERP, carrier &amp; transport systems</li>
+            <li>WMS Readiness Reviews and rescue engagements</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="service-card card-lime">
+        <div class="sc-header">
+          <div class="sc-icon" style="color:var(--lime)">BI — Power BI &amp; Cognos</div>
+          <div class="sc-title">Business Intelligence</div>
+        </div>
+        <div class="sc-body">
+          <ul>
+            <li>Power BI and Cognos dashboard design &amp; delivery</li>
+            <li>AI-powered Reporting Agents for automated insights</li>
+            <li>Sales, gross margin, inventory &amp; KPI dashboards</li>
+            <li>BI consolidation post-ERP migration</li>
+            <li>BI Quick Start — 3 dashboards live in 2 weeks</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Package strip -->
+    <div class="pkg-strip">
+      <div class="pkg-strip-header">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#b8c400" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+        <span>Fixed-Price Entry Packages — all fees credited toward implementation</span>
+      </div>
+      <div class="pkg-grid">
+        <div class="pkg-item">
+          <div class="pkg-name">ERP Readiness Assessment</div>
+          <div class="pkg-price">AED 4,500</div>
+          <div class="pkg-dur">2 working days</div>
+          <div class="pkg-note">Current systems review + written recommendation</div>
+        </div>
+        <div class="pkg-item">
+          <div class="pkg-name">ERP Health Check</div>
+          <div class="pkg-price">AED 6,500</div>
+          <div class="pkg-dur">3 working days</div>
+          <div class="pkg-note">Most requested · Quick-wins list + roadmap</div>
+        </div>
+        <div class="pkg-item">
+          <div class="pkg-name">WMS Readiness Review</div>
+          <div class="pkg-price">AED 5,500</div>
+          <div class="pkg-dur">2–3 working days</div>
+          <div class="pkg-note">Warehouse walk-through + WMS shortlist</div>
+        </div>
+        <div class="pkg-item">
+          <div class="pkg-name">BI Quick Start</div>
+          <div class="pkg-price">AED 8,500</div>
+          <div class="pkg-dur">2 weeks</div>
+          <div class="pkg-note">3 dashboards live · Training included</div>
+        </div>
+        <div class="pkg-item">
+          <div class="pkg-name">Monthly Advisory Retainer</div>
+          <div class="pkg-price">AED 3,500</div>
+          <div class="pkg-dur">Per month</div>
+          <div class="pkg-note">Month-to-month · No long-term commitment</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENTS -->
+<section class="section" id="clients">
+  <div class="container">
+    <div class="eyebrow">Clients & Industry Focus</div>
+    <h2 class="section-title">Who We Serve</h2>
+    <p class="section-sub">More than 20 recognised organisations across the UAE and Levant, spanning FMCG, distribution, healthcare trade, retail, financial services, and B2B environments.</p>
+
+    <div class="industry-grid">
+      <div class="ind-card"><h4>FMCG</h4><p>Commercial visibility, distribution control, and operational reporting for fast-moving businesses including global brands P&amp;G, Mars, Nestlé, and Clorox.</p></div>
+      <div class="ind-card"><h4>Distribution</h4><p>Order-to-cash, inventory, warehousing, logistics, and channel performance optimisation for high-volume distributors.</p></div>
+      <div class="ind-card"><h4>Healthcare Trade</h4><p>Structured operations and integrated visibility for pharmacy networks, medical distributors, and healthcare trade businesses.</p></div>
+      <div class="ind-card"><h4>Financial Services</h4><p>Structured reporting, data integrity, and regulatory visibility for financial services organisations across the Gulf and Levant.</p></div>
+      <div class="ind-card"><h4>Retail</h4><p>Connected systems and analytics to support scale, consistency, and faster commercial decisions across retail operations.</p></div>
+      <div class="ind-card"><h4>B2B</h4><p>End-to-end visibility and operational efficiency for businesses serving trade, wholesale, and corporate customers.</p></div>
+    </div>
+
+    <div class="logo-grid">
+      <div class="logo-cell"><img src="assets/img/logos/aaw.png" alt="AAW"></div>
+      <div class="logo-cell"><img src="assets/img/logos/transmed.png" alt="Transmed"></div>
+      <div class="logo-cell"><img src="assets/img/logos/aster-pharmacy.png" alt="Aster Pharmacy"></div>
+      <div class="logo-cell"><img src="assets/img/logos/subway.png" alt="Subway"></div>
+      <div class="logo-cell"><img src="assets/img/logos/future-pharmacy.png" alt="Future Pharmacy"></div>
+      <div class="logo-cell"><img src="assets/img/logos/eataly.png" alt="Eataly"></div>
+      <div class="logo-cell"><img src="assets/img/logos/al-hikma.png" alt="Al-Hikma"></div>
+      <div class="logo-cell"><img src="assets/img/logos/five-guys.png" alt="Five Guys"></div>
+      <div class="logo-cell"><img src="assets/img/logos/wellfast-pharmacy.png" alt="Wellfast Pharmacy"></div>
+      <div class="logo-cell"><img src="assets/img/logos/med-shop.png" alt="Med Shop"></div>
+      <div class="logo-cell"><img src="assets/img/logos/dar-aldawa.png" alt="Dar AlDawa"></div>
+      <div class="logo-cell"><img src="assets/img/logos/managed-healthcare-pharmacy.png" alt="Managed Healthcare"></div>
+      <div class="logo-cell"><img src="assets/img/logos/al-falah.png" alt="Al-Falah Healthcare"></div>
+      <div class="logo-cell"><img src="assets/img/logos/medx-pharmacy.png" alt="MedX Pharmacy"></div>
+      <div class="logo-cell"><img src="assets/img/logos/tgi-fridays.png" alt="TGI Fridays"></div>
+      <div class="logo-cell"><img src="assets/img/logos/guardian-pharmacy.png" alt="Guardian Pharmacy"></div>
+      <div class="logo-cell"><img src="assets/img/logos/medicina.png" alt="Medicina"></div>
+      <div class="logo-cell"><img src="assets/img/logos/hatan.png" alt="Hatan"></div>
+      <div class="logo-cell"><img src="assets/img/logos/ibn-hayan.png" alt="Ibn Hayan Pharmacies"></div>
+      <div class="logo-cell"><img src="assets/img/logos/pharmacy-seba.png" alt="Pharmacy Seba"></div>
+    </div>
+
+    <!-- Testimonial -->
+    <div class="testi-band">
+      <div class="testi-quote">
+        <div class="testi-mark">"</div>
+        <blockquote>The professionalism and technical knowledge exhibited by Cristal Technologies were outstanding. Their team's dedication to delivering the solution on time and with precision greatly contributed to the success of this project. We highly recommend them for similar Oracle implementations.</blockquote>
+        <cite><strong>Mr. Mohamed F. Nosseir</strong> — Senior IT Business Partner, AAW Group</cite>
+      </div>
+      <div class="testi-badge">
+        <div class="badge-label">Project outcome</div>
+        <div class="badge-val">On Time</div>
+        <div class="badge-sub">Delivered within scope</div>
+        <br>
+        <div class="badge-label" style="margin-top:12px">Issues at startup</div>
+        <div class="badge-val">Zero</div>
+        <div class="badge-sub">Immediate operational use</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section-sm contact-bg" id="contact">
+  <div class="container">
+    <div class="eyebrow">Get in Touch</div>
+    <h2 class="section-title">Contact & Next Steps</h2>
+    <p class="section-sub">Start with a free 30-minute discovery call — honest assessment of your situation and whether we can help. No sales pitch, no commitment.</p>
+
+    <div class="contact-grid">
+      <div class="contact-methods">
+        <div class="contact-method">
+          <div class="method-icon"><svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg></div>
+          <div>
+            <div class="method-label">Office</div>
+            <div class="method-val">Freeway Center, Mirna Chalouhi Hwy<br>Sin El Fil, Lebanon</div>
+          </div>
+        </div>
+        <div class="contact-method">
+          <div class="method-icon"><svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></div>
+          <div>
+            <div class="method-label">Phone — Lebanon</div>
+            <div class="method-val"><a href="tel:+96181030177">+961 81 030177</a></div>
+          </div>
+        </div>
+        <div class="contact-method">
+          <div class="method-icon"><svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></div>
+          <div>
+            <div class="method-label">Phone — UAE</div>
+            <div class="method-val"><a href="tel:+971506414205">+971 50 641 4205</a></div>
+          </div>
+        </div>
+        <div class="contact-method">
+          <div class="method-icon"><svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg></div>
+          <div>
+            <div class="method-label">Email</div>
+            <div class="method-val"><a href="mailto:contact@c-tech.me">contact@c-tech.me</a></div>
+          </div>
+        </div>
+        <div class="contact-method">
+          <div class="method-icon"><svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582"/></svg></div>
+          <div>
+            <div class="method-label">Website</div>
+            <div class="method-val"><a href="https://c-tech.me" target="_blank">www.c-tech.me</a></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="map-wrap">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3312.3!2d35.5497!3d33.8897!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151f17b16f3be7c3%3A0x0!2sFreeway+Center%2C+Mirna+Chalouhi+Hwy%2C+Sin+El+Fil%2C+Lebanon!5e0!3m2!1sen!2slb!4v1"
+          width="100%"
+          height="280"
+          style="border:0"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+        <div class="map-label">
+          <strong>Freeway Center, Mirna Chalouhi Hwy, Sin El Fil, Lebanon</strong><br>
+          <span>Serving clients across the UAE and Levant</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <h2>Ready to discuss your ERP, WMS, or BI project?</h2>
+  <p>Connect with Cristal Technologies for a free, no-obligation conversation about your systems and next steps.</p>
+  <div class="cta-actions">
+    <a href="mailto:contact@c-tech.me" class="btn-lime">Email Us</a>
+    <a href="https://c-tech.me/contact.html" class="btn-ghost">Visit c-tech.me →</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Cristal Technologies</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.4);margin-top:4px">ERP • WMS • Business Intelligence • UAE & Lebanon</div>
+    </div>
+    <div class="footer-info">
+      © 2026 Cristal Technologies. All rights reserved.<br>
+      <a href="mailto:contact@c-tech.me">contact@c-tech.me</a> &nbsp;·&nbsp;
+      <a href="https://c-tech.me">c-tech.me</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
