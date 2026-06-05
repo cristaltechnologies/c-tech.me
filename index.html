@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cristal Technologies | About</title>
+  <meta name="description" content="Cristal Technologies — Independent enterprise consulting for ERP, Logistics &amp; Distribution, Demand Planning, BI &amp; Custom Systems Integration — serving the GCC and Levant.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+<style>
+
+/* ── RESET & ROOT ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+:root {
+  --teal:       #0b7b74;
+  --teal-dark:  #085e58;
+  --teal-deep:  #103836;
+  --lime:       #b8c400;
+  --lime-dim:   #96a200;
+  --ink:        #163533;
+  --ink2:       #2d4a47;
+  --muted:      #617975;
+  --rule:       rgba(22,53,51,.10);
+  --rule2:      rgba(22,53,51,.06);
+  --bg:         #f6f8f8;
+  --surface:    #ffffff;
+  --surface-sm: #f1f5f4;
+  --serif: 'Inter', system-ui, sans-serif;
+  --sans: 'Inter', system-ui, sans-serif;
+  --shadow:     0 16px 48px rgba(8,94,88,.10);
+  --r:          16px;
+}
+
+
+
+/* ── PRINT BUTTON ─────────────────────────────────────────── */
+.print-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  background: var(--teal);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 12px 24px;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(11,123,116,.35);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 999;
+  transition: background .2s, transform .2s;
+}
+.print-btn:hover { background: var(--teal-dark); transform: translateY(-2px); }
+
+/* ── NAV ──────────────────────────────────────────────────── */
+
+/* ── HERO ─────────────────────────────────────────────────── */
+.hero {
+  background: var(--teal-deep);
+  padding: 0 32px;
+  overflow: hidden;
+  position: relative;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 80% 20%, rgba(11,123,116,.35), transparent 55%),
+    radial-gradient(ellipse at 10% 80%, rgba(184,196,0,.12), transparent 50%);
+  pointer-events: none;
+}
+.hero-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 80px 0 72px;
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 60px;
+  align-items: center;
+  position: relative;
+}
+.hero-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--lime);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-eyebrow::before {
+  content: "";
+  width: 32px; height: 2px;
+  background: linear-gradient(90deg, var(--lime), var(--teal));
+  border-radius: 999px;
+}
+.hero h1 {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  color: white;
+  line-height: 1.08;
+  letter-spacing: -.02em;
+  margin-bottom: 20px;
+}
+.hero h1 em { color: var(--lime); font-style: normal; }
+.hero-sub {
+  font-size: 16px;
+  color: rgba(255,255,255,.65);
+  line-height: 1.75;
+  max-width: 520px;
+  margin-bottom: 36px;
+}
+.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-lime {
+  background: var(--lime);
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 13.5px;
+  font-weight: 600;
+  padding: 12px 26px;
+  border-radius: 999px;
+  transition: .2s;
+}
+.btn-lime:hover { background: var(--lime-dim); }
+.btn-ghost {
+  background: rgba(255,255,255,.08);
+  color: rgba(255,255,255,.8);
+  text-decoration: none;
+  font-size: 13.5px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.18);
+  transition: .2s;
+}
+.btn-ghost:hover { background: rgba(255,255,255,.14); color: white; }
+
+/* Hero panel */
+.hero-panel {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: var(--r);
+  padding: 28px;
+  backdrop-filter: blur(12px);
+}
+.hero-panel-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--lime);
+  margin-bottom: 16px;
+}
+.hero-fact {
+  display: flex;
+  gap: 12px;
+  padding: 11px 0;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  align-items: flex-start;
+}
+.hero-fact:last-child { border-bottom: none; }
+.fact-dot {
+  width: 6px; height: 6px;
+  background: var(--lime);
+  border-radius: 50%;
+  margin-top: 7px;
+  flex-shrink: 0;
+}
+.fact-text { font-size: 13.5px; color: rgba(255,255,255,.72); line-height: 1.5; }
+
+/* ── STATS BAR ────────────────────────────────────────────── */
+.stats-bar {
+  background: var(--teal-deep);
+  border-top: 1px solid rgba(255,255,255,.06);
+  border-bottom: 2px solid rgba(184,196,0,.3);
+}
+.stats-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.stat-item {
+  padding: 24px 20px;
+  border-right: 1px solid rgba(255,255,255,.07);
+  text-align: center;
+}
+.stat-item:last-child { border-right: none; }
+.stat-val {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 2rem;
+  color: var(--lime);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.stat-lbl { font-size: 11px; color: rgba(255,255,255,.5); letter-spacing: .04em; }
+
+/* ── CONTAINER ────────────────────────────────────────────── */
+
+
+/* ── SECTION ──────────────────────────────────────────────── */
+.section { padding: 80px 0; }
+.section-sm { padding: 56px 0; }
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 14px;
+}
+.eyebrow::before {
+  content: "";
+  width: 28px; height: 2px;
+  background: linear-gradient(90deg, var(--teal), var(--lime));
+  border-radius: 999px;
+}
+
+h2.section-title {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  color: var(--ink);
+  line-height: 1.15;
+  letter-spacing: -.02em;
+  margin-bottom: 10px;
+  max-width: 680px;
+}
+
+.section-sub {
+  font-size: 15px;
+  color: var(--muted);
+  max-width: 580px;
+  margin-bottom: 44px;
+}
+
+/* ── OVERVIEW ─────────────────────────────────────────────── */
+.overview-grid {
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 32px;
+  align-items: start;
+}
+.overview-body p { color: var(--ink2); font-size: 15px; line-height: 1.8; margin-bottom: 14px; }
+
+.vm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 28px; border-radius: var(--r); overflow: hidden; box-shadow: var(--shadow); }
+.vm-card { padding: 28px 24px; }
+.vm-card:nth-child(1) { background: var(--teal-dark); }
+.vm-card:nth-child(2) { background: var(--teal); }
+.vm-card h3 { font-family: 'Inter', system-ui, sans-serif; font-size: 18px; color: white; margin-bottom: 10px; }
+.vm-card p  { font-size: 13.5px; color: rgba(255,255,255,.72); line-height: 1.65; }
+
+.pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: var(--r); overflow: hidden; }
+.pillar { background: var(--surface); padding: 22px 20px; }
+.pillar-icon { width: 36px; height: 36px; background: rgba(11,123,116,.08); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+.pillar-icon svg { width: 18px; height: 18px; stroke: var(--teal); fill: none; stroke-width: 1.5; }
+.pillar h4 { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+.pillar p  { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+/* ── SOLUTIONS ────────────────────────────────────────────── */
+.solutions-bg { background: var(--teal-deep); }
+.solutions-bg .eyebrow { color: var(--lime); }
+.solutions-bg .eyebrow::before { background: linear-gradient(90deg, var(--lime), var(--teal)); }
+.solutions-bg h2.section-title { color: white; }
+.solutions-bg .section-sub { color: rgba(255,255,255,.55); }
+
+.service-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.service-card {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: var(--r);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform .2s, box-shadow .2s;
+}
+.service-card:hover { transform: translateY(-4px); box-shadow: 0 20px 48px rgba(0,0,0,.25); }
+.sc-header {
+  padding: 20px 22px 16px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.sc-icon {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.sc-title { font-family: 'Inter', system-ui, sans-serif; font-size: 18px; color: white; line-height: 1.2; }
+.sc-
+.sc-body ul { list-style: none; display: grid; gap: 0; }
+.sc-body li {
+  font-size: 13px;
+  color: rgba(255,255,255,.62);
+  padding: 6px 0 6px 16px;
+  position: relative;
+  border-bottom: 1px solid rgba(255,255,255,.05);
+}
+.sc-body li:last-child { border-bottom: none; }
+.sc-body li::before { content: "→"; position: absolute; left: 0; color: var(--lime); font-size: 11px; top: 7px; }
+
+.card-teal   .sc-header { background: var(--teal); }
+.card-teal   .sc-icon   { color: rgba(255,255,255,.7); }
+.card-dark   .sc-header { background: var(--teal-dark); }
+.card-dark   .sc-icon   { color: rgba(255,255,255,.7); }
+.card-lime   .sc-header { background: linear-gradient(135deg, var(--teal-dark), #2a5c00); }
+.card-lime   .sc-icon   { color: var(--lime); }
+
+/* Packages strip */
+.pkg-strip {
+  margin-top: 32px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: var(--r);
+  overflow: hidden;
+}
+.pkg-strip-header {
+  background: rgba(184,196,0,.12);
+  border-bottom: 1px solid rgba(184,196,0,.2);
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.pkg-strip-header span {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--lime);
+}
+.pkg-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+}
+.pkg-item {
+  padding: 18px 16px;
+  border-right: 1px solid rgba(255,255,255,.06);
+}
+.pkg-item:last-child { border-right: none; }
+.pkg-name  { font-size: 12px; font-weight: 600; color: white; margin-bottom: 4px; }
+.pkg-price { font-family: 'Inter', system-ui, sans-serif; font-size: 16px; color: var(--lime); margin-bottom: 2px; }
+.pkg-dur   { font-size: 11px; color: rgba(255,255,255,.45); }
+.pkg-note  { font-size: 10px; color: rgba(255,255,255,.35); margin-top: 4px; font-style: italic; }
+
+/* ── CLIENTS ──────────────────────────────────────────────── */
+.industry-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 48px; }
+.ind-card {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--teal);
+  border-radius: 0 0 var(--r) var(--r);
+  padding: 20px;
+}
+.ind-card h4 { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+.ind-card p  { font-size: 13px; color: var(--muted); line-height: 1.55; }
+
+.logo-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: var(--r);
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+.logo-cell {
+  background: var(--surface);
+  padding: 18px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 62px;
+  transition: background .15s;
+}
+.logo-cell:hover { background: rgba(11,123,116,.05); }
+.logo-cell img {
+  max-width: 90px;
+  max-height: 36px;
+  object-fit: contain;
+  filter: grayscale(80%) opacity(.65);
+  transition: filter .2s;
+}
+.logo-cell:hover img { filter: grayscale(0%) opacity(1); }
+.logo-cell-text {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.3;
+}
+
+/* Testimonial */
+.testi-band {
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  background: var(--teal-deep);
+  border-radius: var(--r);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.testi-quote {
+  padding: 36px 40px;
+  border-right: 1px solid rgba(255,255,255,.08);
+}
+.testi-mark {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 56px;
+  color: var(--lime);
+  line-height: .6;
+  margin-bottom: 16px;
+  opacity: .6;
+}
+.testi-quote blockquote {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 17px;
+  color: white;
+  line-height: 1.65;
+  font-style: italic;
+  margin-bottom: 16px;
+}
+.testi-quote cite { font-size: 12.5px; color: rgba(255,255,255,.55); font-style: normal; }
+.testi-quote cite strong { color: rgba(255,255,255,.85); }
+.testi-badge {
+  padding: 36px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: rgba(184,196,0,.08);
+}
+.testi-badge .badge-label { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--lime); margin-bottom: 10px; }
+.testi-badge .badge-val   { font-family: 'Inter', system-ui, sans-serif; font-size: 28px; color: white; margin-bottom: 6px; }
+.testi-badge .badge-sub   { font-size: 12px; color: rgba(255,255,255,.5); }
+
+/* ── CONTACT ──────────────────────────────────────────────── */
+.contact-bg { background: var(--surface-sm); }
+.contact-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 40px; }
+.contact-methods { display: grid; gap: 12px; }
+.contact-method {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 16px 18px;
+}
+.method-icon {
+  width: 38px; height: 38px;
+  background: rgba(11,123,116,.08);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.method-icon svg { width: 18px; height: 18px; stroke: var(--teal); fill: none; stroke-width: 1.5; }
+.method-label { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+.method-val { font-size: 14px; color: var(--ink); font-weight: 500; }
+.method-val a { color: var(--teal); text-decoration: none; }
+.method-val a:hover { text-decoration: underline; }
+
+.map-wrap {
+  border-radius: var(--r);
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  box-shadow: var(--shadow);
+}
+.map-wrap iframe { display: block; }
+.map-label {
+  background: var(--surface);
+  padding: 14px 18px;
+  border-top: 1px solid var(--rule);
+}
+.map-label strong { font-size: 13px; color: var(--ink); }
+.map-label span   { font-size: 12px; color: var(--muted); }
+
+/* CTA band */
+.cta-band {
+  background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+  padding: 48px 32px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(184,196,0,.15), transparent 65%);
+}
+.cta-band h2 {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  color: white;
+  margin-bottom: 12px;
+  position: relative;
+}
+.cta-band p { color: rgba(255,255,255,.7); font-size: 15px; margin-bottom: 28px; position: relative; }
+.cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; position: relative; }
+
+/* Footer */
+.footer {
+  background: var(--teal-deep);
+  border-top: 1px solid rgba(255,255,255,.06);
+  padding: 32px;
+}
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.footer-brand { color: rgba(255,255,255,.8); font-size: 14px; font-weight: 600; }
+.footer-info  { font-size: 12px; color: rgba(255,255,255,.4); text-align: right; }
+.footer-info a { color: rgba(255,255,255,.55); text-decoration: none; }
+
+/* ── ANIMATIONS ───────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fadeUp .6s ease both; }
+.delay-1 { animation-delay: .1s; }
+.delay-2 { animation-delay: .2s; }
+.delay-3 { animation-delay: .3s; }
+
+/* ── RESPONSIVE ───────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .hero-inner, .overview-grid, .contact-grid, .testi-band { grid-template-columns: 1fr; }
+  .hero-panel { display: none; }
+  .service-cards { grid-template-columns: 1fr; }
+  .pkg-grid { grid-template-columns: repeat(2, 1fr); }
+  .logo-grid { grid-template-columns: repeat(3, 1fr); }
+  .industry-grid { grid-template-columns: 1fr 1fr; }
+  .stats-inner { grid-template-columns: repeat(2, 1fr); }
+  .vm-grid, .pillars { grid-template-columns: 1fr; }
+  .testi-badge { display: none; }
+  }
+
+@media (max-width: 560px) {
+  .industry-grid, .logo-grid { grid-template-columns: repeat(2, 1fr); }
+  .stats-inner { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ── PRINT ────────────────────────────────────────────────── */
+@media print {
+  .print-btn,   .section, .section-sm { padding: 40px 0; }
+  .hero { padding: 40px 32px; }
+  .hero-inner { grid-template-columns: 1fr; }
+  .service-cards { grid-template-columns: 1fr 1fr; }
+  
+  @page { margin: 15mm 20mm; }
+}
+
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html" aria-label="Cristal Technologies home">
+      <img src="assets/img/logo.jpg" alt="Cristal Technologies logo">
+      <div class="brand-meta">ERP • Logistics &amp; Distribution • BI</div>
+    </a>
+    <nav class="nav" aria-label="Primary navigation">
+      <a href="index.html" class="active">About</a>
+      <a href="solutions.html">Solutions</a>
+      <a href="products.html">Products</a>
+      <a href="case-studies.html">Case Studies</a>
+      <a href="team.html">Team</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow fade-up">Company Profile 2026</div>
+      <h1 class="fade-up delay-1">Senior. Independent.<br><em>Vendor-Neutral.</em></h1>
+      <p class="hero-sub fade-up delay-2">
+        Enterprise technology advisory for FMCG, distribution, financial services,
+        and healthcare trade businesses across the Gulf and Levant —
+        built on 40 years of hands-on delivery experience.
+      </p>
+
+    </div>
+    <div class="hero-panel fade-up delay-2">
+      <div class="hero-panel-label">Why Cristal Technologies</div>
+      <div class="hero-fact"><div class="fact-dot"></div><div class="fact-text">40+ years of enterprise operations experience across FMCG, distribution, financial services, and healthcare trade</div></div>
+      <div class="hero-fact"><div class="fact-dot"></div><div class="fact-text">Zero vendor alignments — recommendations driven by your business requirements alone</div></div>
+      <div class="hero-fact"><div class="fact-dot"></div><div class="fact-text">Senior delivery — the consultant who scopes your project executes it</div></div>
+      <div class="hero-fact"><div class="fact-dot"></div><div class="fact-text">Fixed-price entry packages — clear scope, defined fee, no surprises</div></div>
+      <div class="hero-fact"><div class="fact-dot"></div><div class="fact-text">Based between Dubai and Beirut — deep Gulf and Levant regional knowledge</div></div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- OVERVIEW -->
+<section class="section" id="overview">
+  <div class="container">
+    <div class="overview-grid">
+      <div class="overview-body">
+        <div class="eyebrow">Company Overview</div>
+        <h2 class="section-title">Who We Are</h2>
+        <p>Cristal Technologies is a specialist enterprise IT consultancy delivering senior, vendor-neutral advisory and hands-on implementation across Oracle &amp; Microsoft ERP, INFOR Warehouse Management Systems, and Business Intelligence platforms built on Power BI and Cognos.</p>
+        <p>Founded and led by Samir Harb, the practice is built on 40 years of enterprise operations experience. An FMCG domain expert with extensive B2B experience, Samir has worked with leading global brands including P&amp;G, Mars, Nestlé, and Clorox — bringing deep commercial and operational knowledge to every engagement.</p>
+        <p>Based between Dubai and Beirut, Cristal Technologies brings direct regional knowledge to every engagement, including deep familiarity with the regulatory and operational realities of the Gulf and Levant corridor.</p>
+
+        <div class="vm-grid">
+          <div class="vm-card">
+            <h3>Our Mission</h3>
+            <p>To deliver senior, vendor-neutral enterprise technology advisory that helps FMCG, distribution, financial services, and healthcare trade businesses across the Gulf and Levant achieve operational excellence.</p>
+          </div>
+          <div class="vm-card">
+            <h3>Our Approach</h3>
+            <p>Every engagement begins with the business problem — not the system. We work backwards from the outcome the client needs, delivered by the same senior consultant who scoped the project. No junior handoffs. No vendor agenda.</p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="eyebrow" style="margin-top:4px">Why Independent</div>
+        <h2 class="section-title" style="font-size:1.5rem;margin-bottom:20px">Four reasons clients choose us</h2>
+        <div class="pillars">
+          <div class="pillar">
+            <div class="pillar-icon">
+              <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <h4>No Vendor Alignment</h4>
+            <p>We are not a reseller or certified partner of any software vendor. Every recommendation is driven by your business requirements alone.</p>
+          </div>
+          <div class="pillar">
+            <div class="pillar-icon">
+              <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0"/></svg>
+            </div>
+            <h4>Senior Delivery</h4>
+            <p>The consultant who scopes your project executes it. No handoffs to junior teams. What you see in the proposal is what you get.</p>
+          </div>
+          <div class="pillar">
+            <div class="pillar-icon">
+              <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33"/></svg>
+            </div>
+            <h4>Fixed Prices</h4>
+            <p>Every engagement has a defined scope and fixed fee agreed before work starts. No open-ended billing, no scope creep surprises.</p>
+          </div>
+          <div class="pillar">
+            <div class="pillar-icon">
+              <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3"/></svg>
+            </div>
+            <h4>Regional Knowledge</h4>
+            <p>Dubai and Beirut based. Deep familiarity with UAE VAT, WPS, Lebanon regulatory requirements, and Gulf and Levant business culture.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-sm">
+  <div class="container">
+    <span class="eyebrow">Delivery Model</span>
+    <h2 style="margin-bottom:28px;">From first contact to measurable value.</h2>
+    <div class="steps-row">
+      <div class="step-cell">
+        <div class="step-n">01</div>
+        <span class="step-free">Free</span>
+        <h4>Discovery Call</h4>
+        <p>30 minutes. Your situation, your goals. Honest assessment of fit — no sales pitch.</p>
+      </div>
+      <div class="step-cell">
+        <div class="step-n">02</div>
+        <h4>Fixed-Scope Proposal</h4>
+        <p>One page. Scope, deliverable, price, and timeline agreed before any work begins.</p>
+      </div>
+      <div class="step-cell">
+        <div class="step-n">03</div>
+        <h4>Senior Delivery</h4>
+        <p>The consultant you spoke with executes the work. No handoffs, no substitutions.</p>
+      </div>
+      <div class="step-cell">
+        <div class="step-n">04</div>
+        <h4>Clear Deliverable</h4>
+        <p>Written report with specific, actionable recommendations — not a generic slide deck.</p>
+      </div>
+      <div class="step-cell">
+        <div class="step-n">05</div>
+        <h4>Your Choice</h4>
+        <p>Proceed to implementation, take the report elsewhere, or do nothing. No lock-in.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDIES + EXPERTISE -->
+<section class="section-sm">
+  <div class="container grid grid-2">
+    <div class="card">
+      <span class="eyebrow">Case Studies</span>
+      <h2>Results-focused delivery.</h2>
+      <p class="lead">
+        We help clients deliver enterprise projects with stronger visibility, better execution, and faster operational readiness.
+      </p>
+      <div class="table-ish">
+        <div class="table-row"><strong>ERP implementations</strong><span>On-time delivery</span><span>Business-ready go-live</span></div>
+        <div class="table-row"><strong>Logistics &amp; Distribution optimization</strong><span>Task efficiency</span><span>Inventory control</span></div>
+        <div class="table-row"><strong>Analytics deployments</strong><span>Reporting speed</span><span>Commercial visibility</span></div>
+      </div>
+      <div class="btn-group">
+        <a class="btn btn-secondary" href="case-studies.html">View Case Studies</a>
+      </div>
+    </div>
+    <div class="card">
+      <span class="eyebrow">Expertise Areas</span>
+      <ul class="list-clean">
+        <li>ERP implementation and process redesign</li>
+        <li>Logistics &amp; Distribution Solutions — WMS and TMS design and support</li>
+        <li>BI architecture, dashboards, and executive reporting</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<!-- CTA BAND -->
+<section class="section-sm">
+  <div class="container">
+    <div class="band">
+      <span class="eyebrow" style="color:#fff">Contact</span>
+      <h2>Looking to upgrade your ERP, warehouse, or reporting capability?</h2>
+      <p>Connect with Cristal Technologies to discuss your current systems, operational pain points, and next-step roadmap.</p>
+      <div class="btn-group">
+        <a class="btn btn-primary" href="contact.html">Talk to Our Team</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-card">
+      <div class="footer-grid">
+        <div>
+          <img class="logo-small" src="assets/img/logo.jpg" alt="Cristal Technologies logo">
+          <p style="margin-top:16px;color:rgba(238,244,244,.82)">
+            Independent enterprise consulting for ERP, Logistics &amp; Distribution, Demand Planning, BI &amp; Custom Systems Integration — serving the GCC and Levant.
+          </p>
+          <p style="margin-top:12px;color:rgba(238,244,244,.6);font-size:.85rem">
+            Freeway Center, Mirna Chalouhi Hwy, Sin El Fil, Lebanon<br>
+            <a href="tel:+96181030177" style="color:rgba(238,244,244,.8)">+961 81 030177</a> &nbsp;·&nbsp;
+            <a href="tel:+971506414205" style="color:rgba(238,244,244,.8)">+971 50 641 4205</a> &nbsp;·&nbsp;
+            <a href="mailto:contact@c-tech.me" style="color:rgba(238,244,244,.8)">contact@c-tech.me</a>
+          </p>
+        </div>
+        <div>
+          <h3>Pages</h3>
+          <div class="footer-links">
+            <a href="index.html">About</a>
+            <a href="solutions.html">Solutions</a>
+            <a href="products.html">Products</a>
+            <a href="case-studies.html">Case Studies</a>
+            <a href="team.html">Team</a>
+            <a href="contact.html">Contact</a>
+          </div>
+        </div>
+        <div>
+          <h3>Let's build smarter operations</h3>
+          <p style="color:rgba(238,244,244,.82)">
+            Senior, vendor-neutral consulting. Fixed scope. Fixed fee. No junior handoffs.
+          </p>
+          <div class="btn-group">
+            <a class="btn btn-primary" href="contact.html">Book a Consultation</a>
+          </div>
+        </div>
+      </div>
+      <hr class="sep">
+      <p style="margin-top:18px;color:rgba(238,244,244,.62)">© 2026 Cristal Technologies. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

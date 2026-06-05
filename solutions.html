@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solutions | Cristal Technologies</title>
+  <meta name="description" content="Cristal Technologies — ERP, WMS, BI, Demand Planning &amp; Custom Solutions consulting for mid-market businesses across the GCC and Levant.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html" aria-label="Cristal Technologies home">
+      <img src="assets/img/logo.jpg" alt="Cristal Technologies logo">
+      <div class="brand-meta">ERP • Logistics &amp; Distribution • BI</div>
+    </a>
+    <nav class="nav" aria-label="Primary navigation">
+      <a href="index.html">About</a>
+      <a href="solutions.html" class="active">Solutions</a>
+      <a href="products.html">Products</a>
+      <a href="case-studies.html">Case Studies</a>
+      <a href="team.html">Team</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-card">
+      <span class="eyebrow">Solutions</span>
+      <h1>Connected enterprise solutions designed around business outcomes.</h1>
+      <p class="lead" style="white-space:nowrap;max-width:none;overflow:visible;">
+        Cristal Technologies helps organizations build a modern operational stack across ERP, warehousing, and Business Intelligence.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- CORE SOLUTIONS -->
+<section class="section-sm">
+  <div class="container grid grid-3">
+    <article class="card"><h3>ERP Implementation</h3><p>Oracle JD Edwards and Microsoft Dynamics 365 implementation, localization, rollout planning, process mapping, testing, enablement, and post-go-live stabilization.</p></article>
+    <article class="card"><h3>Demand Management Implementation</h3><p>Oracle Fusion Cloud SCM — demand planning, statistical forecasting, consensus planning, and supply-demand balancing for distribution, manufacturing, and FMCG organisations.</p></article>
+    <article class="card"><h3>Logistics &amp; Distribution Solutions</h3><p><strong>Warehouse Management (WMS)</strong> — INFOR WMS for inbound, storage, replenishment, picking, cycle counting, and dispatch.<br><strong>Transportation Management (TMS)</strong> — Roadnet transportation planning and route optimisation for fleet and delivery operations.</p></article>
+    <article class="card"><h3>BI Dashboards — Power BI &amp; Cognos</h3><p>Operational and executive dashboards and AI-powered Reporting Agents built on Power BI and Cognos for sales, gross margin, inventory, customer performance, warehousing, and KPI tracking.</p></article>
+  </div>
+</section>
+
+<!-- INTERACTIVE DASHBOARDS -->
+<section class="section-sm">
+  <div class="container">
+    <span class="eyebrow">Live Showcase</span>
+    <h2 style="margin-bottom:6px;">Interactive Dashboards</h2>
+    <p class="lead" style="margin-bottom:24px;">Explore our live ERP and BI dashboards — click any tab to preview.</p>
+
+    <!-- Progress bar -->
+    <div style="height:3px;background:rgba(11,123,116,.12);border-radius:2px;margin-bottom:6px;overflow:hidden;">
+      <div id="scProgress" style="height:100%;width:0%;background:linear-gradient(90deg,var(--primary),var(--accent));transition:width linear;"></div>
+    </div>
+
+    <!-- Main tabs -->
+    <div id="scMainTabs" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:0;">
+      <button class="sc-tab active" onclick="scManual(this,0)"
+        style="background:rgba(11,123,116,1);color:#fff;border:none;border-radius:10px 10px 0 0;padding:10px 20px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:.2s;">
+        Sales &amp; Operational Dashboard
+      </button>
+      <button class="sc-tab" onclick="scManual(this,1)"
+        style="background:rgba(11,123,116,.12);color:var(--primary);border:none;border-radius:10px 10px 0 0;padding:10px 20px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:.2s;">
+        Warehouse Operational Dashboard
+      </button>
+      <button class="sc-tab" onclick="scManual(this,2)"
+        style="background:rgba(11,123,116,.12);color:var(--primary);border:none;border-radius:10px 10px 0 0;padding:10px 20px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:.2s;">
+        Financial Dashboard
+      </button>
+    </div>
+
+    <!-- Financial sub-tabs -->
+    <div id="scSubTabs" style="display:none;flex-wrap:wrap;gap:4px;padding:5px 0 0 0;">
+      <button class="sc-sub" onclick="scSubManual(this,0)"
+        style="background:rgba(11,123,116,.08);color:var(--primary);border:1px solid rgba(11,123,116,.2);border-radius:7px 7px 0 0;padding:5px 14px;font-family:inherit;font-size:11.5px;font-weight:700;cursor:pointer;transition:.2s;">
+        Financial Statements
+      </button>
+      <button class="sc-sub" onclick="scSubManual(this,1)"
+        style="background:rgba(11,123,116,.08);color:var(--primary);border:1px solid rgba(11,123,116,.2);border-radius:7px 7px 0 0;padding:5px 14px;font-family:inherit;font-size:11.5px;font-weight:700;cursor:pointer;transition:.2s;">
+        Cash Flow
+      </button>
+      <button class="sc-sub" onclick="scSubManual(this,2)"
+        style="background:rgba(11,123,116,.08);color:var(--primary);border:1px solid rgba(11,123,116,.2);border-radius:7px 7px 0 0;padding:5px 14px;font-family:inherit;font-size:11.5px;font-weight:700;cursor:pointer;transition:.2s;">
+        AR Ageing
+      </button>
+      <button class="sc-sub" onclick="scSubManual(this,3)"
+        style="background:rgba(11,123,116,.08);color:var(--primary);border:1px solid rgba(11,123,116,.2);border-radius:7px 7px 0 0;padding:5px 14px;font-family:inherit;font-size:11.5px;font-weight:700;cursor:pointer;transition:.2s;">
+        AP Ageing
+      </button>
+      <button class="sc-sub" onclick="scSubManual(this,4)"
+        style="background:rgba(11,123,116,.08);color:var(--primary);border:1px solid rgba(11,123,116,.2);border-radius:7px 7px 0 0;padding:5px 14px;font-family:inherit;font-size:11.5px;font-weight:700;cursor:pointer;transition:.2s;">
+        Ratios &amp; KPIs
+      </button>
+    </div>
+
+    <div style="border:2px solid var(--primary);border-radius:0 10px 10px 10px;overflow:hidden;background:#fff;">
+      <div id="sc-erp" class="sc-panel" style="display:block">
+        <iframe src="cristal_erp_dashboard.html" style="width:100%;height:720px;border:0;display:block;" loading="lazy" title="Sales &amp; Operational Dashboard"></iframe>
+      </div>
+      <div id="sc-wms" class="sc-panel" style="display:none">
+        <iframe src="3pl_warehouse_bi_dashboard.html" style="width:100%;height:720px;border:0;display:block;" loading="lazy" title="Warehouse Operational Dashboard"></iframe>
+      </div>
+      <div id="sc-fin" class="sc-panel" style="display:none">
+        <iframe id="scFinFrame" src="cristal_technologies_erp_dashboard.html" style="width:100%;height:720px;border:0;display:block;" loading="lazy" title="Financial Dashboard"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+// Sequence: Sales, WH, Fin-Statements, Fin-CashFlow, Fin-AR, Fin-AP, Fin-Ratios, repeat
+var SC_DURATION = 8000;
+var SC_PANELS   = ['sc-erp', 'sc-wms', 'sc-fin', 'sc-fin', 'sc-fin', 'sc-fin', 'sc-fin'];
+var SC_MAIN_IDX = [0, 1, 2, 2, 2, 2, 2];
+var SC_SUB_IDX  = [-1, -1, 0, 1, 2, 3, 4];
+var SC_FIN_HASH = ['#financial-statements','#cash-flow','#ar-ageing','#ap-ageing','#ratios-kpis'];
+var _scCur = 0, _scTimer;
+
+function _scActivate(i) {
+  var panelId = SC_PANELS[i];
+  var mainIdx = SC_MAIN_IDX[i];
+  var subIdx  = SC_SUB_IDX[i];
+  var mainBtns = document.querySelectorAll('#scMainTabs .sc-tab');
+  mainBtns.forEach(function(t, mi) {
+    t.style.background = mi === mainIdx ? 'rgba(11,123,116,1)' : 'rgba(11,123,116,.12)';
+    t.style.color = mi === mainIdx ? '#fff' : 'var(--primary)';
+  });
+  var subWrap = document.getElementById('scSubTabs');
+  var subBtns = subWrap.querySelectorAll('.sc-sub');
+  if (panelId === 'sc-fin') {
+    subWrap.style.display = 'flex';
+    subBtns.forEach(function(t, si) {
+      t.style.background = si === subIdx ? 'rgba(11,123,116,1)' : 'rgba(11,123,116,.08)';
+      t.style.color = si === subIdx ? '#fff' : 'var(--primary)';
+    });
+    var frame = document.getElementById('scFinFrame');
+    if (frame) {
+      try {
+        frame.contentWindow.showTab(subIdx);
+      } catch(e) {
+        // iframe not yet loaded — wait then try again
+        frame.addEventListener('load', function onLoad() {
+          frame.removeEventListener('load', onLoad);
+          try { frame.contentWindow.showTab(subIdx); } catch(e2) {}
+        }, { once: true });
+      }
+    }
+  } else {
+    subWrap.style.display = 'none';
+    subBtns.forEach(function(t){ t.style.background = 'rgba(11,123,116,.08)'; t.style.color = 'var(--primary)'; });
+  }
+  document.querySelectorAll('.sc-panel').forEach(function(p){ p.style.display = 'none'; });
+  var panel = document.getElementById(panelId);
+  if (panel) panel.style.display = 'block';
+}
+
+function _scProgress() {
+  var bar = document.getElementById('scProgress');
+  if (!bar) return;
+  bar.style.transition = 'none'; bar.style.width = '0%';
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){
+    bar.style.transition = 'width ' + SC_DURATION + 'ms linear'; bar.style.width = '100%';
+  }); });
+}
+
+function _scNext() {
+  _scCur = (_scCur + 1) % SC_PANELS.length;
+  _scActivate(_scCur); _scProgress();
+  clearTimeout(_scTimer); _scTimer = setTimeout(_scNext, SC_DURATION);
+}
+
+function scManual(btn, mainTabIdx) {
+  for (var i = 0; i < SC_MAIN_IDX.length; i++) {
+    if (SC_MAIN_IDX[i] === mainTabIdx) { _scCur = i; break; }
+  }
+  _scActivate(_scCur); _scProgress();
+  clearTimeout(_scTimer); _scTimer = setTimeout(_scNext, SC_DURATION);
+}
+
+function scSubManual(btn, subIdx) {
+  for (var i = 0; i < SC_SUB_IDX.length; i++) {
+    if (SC_SUB_IDX[i] === subIdx) { _scCur = i; break; }
+  }
+  _scActivate(_scCur); _scProgress();
+  clearTimeout(_scTimer); _scTimer = setTimeout(_scNext, SC_DURATION);
+}
+
+document.addEventListener('DOMContentLoaded', function(){
+  _scActivate(0); _scProgress(); _scTimer = setTimeout(_scNext, SC_DURATION);
+});
+</script>
+
+<!-- DELIVERY MODEL + VALUE -->
+<section class="section">
+  <div class="container grid grid-2">
+    <div class="card">
+      <span class="eyebrow">Delivery Model</span>
+      <h2>From assessment to measurable value.</h2>
+      <ul class="list-clean">
+        <li>Current-state discovery and process assessment</li>
+        <li>Solution architecture and operating model design</li>
+        <li>Implementation and controlled testing</li>
+        <li>User adoption, KPI tracking, and continuous improvement</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="eyebrow">Value Focus</span>
+      <h2>Built for visibility, control, and efficiency.</h2>
+      <p class="lead">
+        Every solution is mapped to business gains such as faster reporting, stronger inventory control,
+        lower manual effort, better fulfillment execution, and clearer management visibility.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- FIXED-PRICE PACKAGES -->
+<section class="section-sm">
+  <div class="container">
+    <span class="eyebrow">Fixed-Scope Packages</span>
+    <h2 style="margin-bottom:8px;">Clear scope. Fixed price. No surprises.</h2>
+    <p class="lead" style="margin-bottom:32px;">Entry-point engagements for growing businesses. All fees credited toward implementation if you proceed.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;">
+
+      <div style="background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:14px;">
+        <div>
+          <span style="display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--primary);background:rgba(11,123,116,.08);padding:4px 12px;border-radius:999px;margin-bottom:12px;">Assessment</span>
+          <h3 style="font-size:1.05rem;font-weight:700;color:var(--ink);margin-bottom:6px;">ERP Readiness Assessment</h3>
+          <p style="font-size:.88rem;color:var(--muted);line-height:1.55;">Know what you need before you spend on software.</p>
+        </div>
+        <ul style="list-style:none;display:grid;gap:7px;padding:0;margin:0;">
+          <li style="font-size:.88rem;color:var(--ink);display:flex;gap:8px;"><span style="color:var(--primary);font-weight:700;">&#10003;</span>Current systems &amp; process review</li>
+          <li style="font-size:.88rem;color:var(--ink);display:flex;gap:8px;"><span style="color:var(--primary);font-weight:700;">&#10003;</span>Business flow mapping</li>
+          <li style="font-size:.88rem;color:var(--ink);display:flex;gap:8px;"><span style="color:var(--primary);font-weight:700;">&#10003;</span>Written recommendation report</li>
+          <li style="font-size:.88rem;color:var(--ink);display:flex;gap:8px;"><span style="color:var(--primary);font-weight:700;">&#10003;</span>ERP shortlist &amp; budget range</li>
+        </ul>
+        <div style="margin-top:auto;display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid var(--line);">
+          <span style="font-size:.78rem;color:var(--muted);">2 working days</span>
+          <a href="contact.html" class="btn btn-secondary" style="font-size:.82rem;padding:8px 18px;">Request</a>
+        </div>
+      </div>
+
+      <div style="background:var(--primary);border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:14px;position:relative;overflow:hidden;">
+        <div style="position:absolute;top:14px;right:14px;font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--primary);background:#fff;padding:3px 10px;border-radius:999px;">Most Requested</div>
+        <div>
+          <span style="display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.7);background:rgba(255,255,255,.12);padding:4px 12px;border-radius:999px;margin-bottom:12px;">ERP</span>
+          <h3 style="font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:6px;">ERP Health Check</h3>
+          <p style="font-size:.88rem;color:rgba(255,255,255,.75);line-height:1.55;">Not getting full value from your current ERP?</p>
+        </div>
+        <ul style="list-style:none;display:grid;gap:7px;padding:0;margin:0;">
+          <li style="font-size:.88rem;color:rgba(255,255,255,.9);display:flex;gap:8px;"><span style="color:var(--lime);font-weight:700;">&#10003;</span>Full system configuration review</li>
+          <li style="font-size:.88rem;color:rgba(255,255,255,.9);display:flex;gap:8px;"><span style="color:var(--lime);font-weight:700;">&#10003;</span>User adoption assessment</li>
+          <li style="font-size:.88rem;color:rgba(255,255,255,.9);display:flex;gap:8px;"><span style="color:var(--lime);font-weight:700;">&#10003;</span>Data quality audit</li>
+          <li style="font-size:.88rem;color:rgba(255,255,255,.9);display:flex;gap:8px;"><span style="color:var(--lime);font-weight:700;">&#10003;</span>Prioritised findings + quick-wins list</li>
+          <li style="font-size:.88rem;color:rgba(255,255,255,.9);display:flex;gap:8px;"><span style="color:var(--lime);font-weight:700;">&#10003;</span>Improvement roadmap</li>
+        </ul>
+        <div style="margin-top:auto;display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid rgba(255,255,255,.2);">
+          <span style="font-size:.78rem;color:rgba(255,255,255,.65);">3 working days</span>
+          <a href="contact.html" class="btn" style="font-size:.82rem;padding:8px 18px;background:#fff;color:var(--primary);font-weight:700;border-radius:999px;text-decoration:none;">Request</a>
+        </div>
+      </div>
+
+      <div style="background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:14px;">
+        <div>
+          <span style="display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--primary);background:rgba(11,123,116,.08);padding:4px 12px;border-radius:999px;margin-bottom:12px;">Logistics &amp; Distribution</span>
+          <h3 style="font-size:1.05rem;font-weight:700;color:var(--ink);margin-bottom:6px;">Logistics &amp; Distribution Readiness Review</h3>
+          <p style="font-size:.88rem;color:var(--muted);line-height:1.55;">Before investing in warehouse or transport technology.</p>
+        </div>
+        <ul style="list-style:none;display:grid;gap:7px;padding:0;margin:0;">
+          <li style="font-size:.88rem;color:var(--ink);display:flex;gap:8px;"><span style="color:var(--primary);font-weight:700;">&#10003;</span>Warehouse &amp; transport process review</li>
+          <li style="font-size:.88rem;color:var(--ink);display:flex;gap:8px;"><span style="color:var(--primary);font-weight:700;">&#10003;</span>WMS &amp; TMS gap analysis and shortlist</li>
+          <li style="font-size:.88rem;color:var(--ink);display:flex;gap:8px;"><span style="color:var(--primary);font-weight:700;">&#10003;</span>Quick-wins + implementation scope</li>
+        </ul>
+        <div style="margin-top:auto;display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid var(--line);">
+          <span style="font-size:.78rem;color:var(--muted);">2–3 working days</span>
+          <a href="contact.html" class="btn btn-secondary" style="font-size:.82rem;padding:8px 18px;">Request</a>
+        </div>
+      </div>
+
+      <div style="background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:14px;">
+        <div>
+          <span style="display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--primary);background:rgba(11,123,116,.08);padding:4px 12px;border-radius:999px;margin-bottom:12px;">Reporting</span>
+          <h3 style="font-size:1.05rem;font-weight:700;color:var(--ink);margin-bottom:6px;">BI Quick Start</h3>
+          <p style="font-size:.88rem;color:var(--muted);line-height:1.55;">3 management dashboards live in 2 weeks.</p>
+        </div>
+        <ul style="list-style:none;display:grid;gap:7px;padding:0;margin:0;">
+          <li style="font-size:.88rem;color:var(--ink);display:flex;gap:8px;"><span style="color:var(--primary);font-weight:700;">&#10003;</span>3 Power BI or Cognos dashboards live</li>
+          <li style="font-size:.88rem;color:var(--ink);display:flex;gap:8px;"><span style="color:var(--primary);font-weight:700;">&#10003;</span>Connected to your existing data</li>
+          <li style="font-size:.88rem;color:var(--ink);display:flex;gap:8px;"><span style="color:var(--primary);font-weight:700;">&#10003;</span>AI-powered Reporting Agents</li>
+          <li style="font-size:.88rem;color:var(--ink);display:flex;gap:8px;"><span style="color:var(--primary);font-weight:700;">&#10003;</span>Training + 30-day support</li>
+        </ul>
+        <div style="margin-top:auto;display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid var(--line);">
+          <span style="font-size:.78rem;color:var(--muted);">2 weeks</span>
+          <a href="contact.html" class="btn btn-secondary" style="font-size:.82rem;padding:8px 18px;">Request</a>
+        </div>
+      </div>
+
+      <div style="background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:14px;">
+        <div>
+          <span style="display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--primary);background:rgba(11,123,116,.08);padding:4px 12px;border-radius:999px;margin-bottom:12px;">Ongoing</span>
+          <h3 style="font-size:1.05rem;font-weight:700;color:var(--ink);margin-bottom:6px;">Monthly Advisory Retainer</h3>
+          <p style="font-size:.88rem;color:var(--muted);line-height:1.55;">Senior IT advisor without the full-time cost.</p>
+        </div>
+        <ul style="list-style:none;display:grid;gap:7px;padding:0;margin:0;">
+          <li style="font-size:.88rem;color:var(--ink);display:flex;gap:8px;"><span style="color:var(--primary);font-weight:700;">&#10003;</span>4 hrs advisory + availability</li>
+          <li style="font-size:.88rem;color:var(--ink);display:flex;gap:8px;"><span style="color:var(--primary);font-weight:700;">&#10003;</span>Vendor quote reviews</li>
+          <li style="font-size:.88rem;color:var(--ink);display:flex;gap:8px;"><span style="color:var(--primary);font-weight:700;">&#10003;</span>One meeting per month</li>
+          <li style="font-size:.88rem;color:var(--ink);display:flex;gap:8px;"><span style="color:var(--primary);font-weight:700;">&#10003;</span>No long-term commitment</li>
+        </ul>
+        <div style="margin-top:auto;display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid var(--line);">
+          <span style="font-size:.78rem;color:var(--muted);">Month-to-month</span>
+          <a href="contact.html" class="btn btn-secondary" style="font-size:.82rem;padding:8px 18px;">Request</a>
+        </div>
+      </div>
+
+    </div>
+    <p style="font-size:.82rem;color:var(--muted);margin-top:16px;text-align:center;">All fees credited toward implementation if you proceed.</p>
+  </div>
+</section>
+<!-- INDUSTRY FOCUS -->
+<section class="section-sm">
+  <div class="container">
+    <span class="eyebrow">Clients &amp; Industry Focus</span>
+    <h2 style="margin-bottom:12px;">Who We Serve</h2>
+    <p class="lead" style="margin-bottom:32px;">More than 20 recognised organisations across the UAE and Levant, spanning FMCG, distribution, healthcare trade, retail, financial services, and B2B environments.</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+      <div class="card" style="padding:24px;border-top:3px solid var(--primary);">
+        <h4 style="font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:10px;">FMCG</h4>
+        <p style="color:var(--muted);font-size:.9rem;line-height:1.65;">Commercial visibility, distribution control, and operational reporting for fast-moving businesses including global brands P&amp;G, Mars, Nestlé, and Clorox.</p>
+      </div>
+      <div class="card" style="padding:24px;border-top:3px solid var(--primary);">
+        <h4 style="font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:10px;">Distribution</h4>
+        <p style="color:var(--muted);font-size:.9rem;line-height:1.65;">Order-to-cash, inventory, warehousing, logistics, and channel performance optimisation for high-volume distributors.</p>
+      </div>
+      <div class="card" style="padding:24px;border-top:3px solid var(--primary);">
+        <h4 style="font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:10px;">Healthcare Trade</h4>
+        <p style="color:var(--muted);font-size:.9rem;line-height:1.65;">Structured operations and integrated visibility for pharmacy networks, medical distributors, and healthcare trade businesses.</p>
+      </div>
+      <div class="card" style="padding:24px;border-top:3px solid var(--primary);">
+        <h4 style="font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:10px;">Financial Services</h4>
+        <p style="color:var(--muted);font-size:.9rem;line-height:1.65;">Structured reporting, data integrity, and regulatory visibility for financial services organisations across the Gulf and Levant.</p>
+      </div>
+      <div class="card" style="padding:24px;border-top:3px solid var(--primary);">
+        <h4 style="font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:10px;">Retail</h4>
+        <p style="color:var(--muted);font-size:.9rem;line-height:1.65;">Connected systems and analytics to support scale, consistency, and faster commercial decisions across retail operations.</p>
+      </div>
+      <div class="card" style="padding:24px;border-top:3px solid var(--primary);">
+        <h4 style="font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:10px;">B2B</h4>
+        <p style="color:var(--muted);font-size:.9rem;line-height:1.65;">End-to-end visibility and operational efficiency for businesses serving trade, wholesale, and corporate customers.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- CTA -->
+<section class="section-sm">
+  <div class="container">
+    <div class="band">
+      <span class="eyebrow" style="color:#fff">Get Started</span>
+      <h2>Looking to upgrade your ERP, warehouse, or reporting capability?</h2>
+      <p>Connect with Cristal Technologies to discuss your current systems, operational pain points, and next-step roadmap.</p>
+      <div class="btn-group">
+        <a class="btn btn-secondary" href="contact.html">Talk to Our Team</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-card">
+      <div class="footer-grid">
+        <div>
+          <img class="logo-small" src="assets/img/logo.jpg" alt="Cristal Technologies logo">
+          <p style="margin-top:16px;color:rgba(238,244,244,.82)">
+            Independent enterprise consulting for ERP, Logistics &amp; Distribution, Demand Planning, BI &amp; Custom Systems Integration — serving the GCC and Levant.
+          </p>
+          <p style="margin-top:12px;color:rgba(238,244,244,.6);font-size:.85rem">
+            Freeway Center, Mirna Chalouhi Hwy, Sin El Fil, Lebanon<br>
+            <a href="tel:+96181030177" style="color:rgba(238,244,244,.8)">+961 81 030177</a> &nbsp;·&nbsp;
+            <a href="tel:+971506414205" style="color:rgba(238,244,244,.8)">+971 50 641 4205</a> &nbsp;·&nbsp;
+            <a href="mailto:contact@c-tech.me" style="color:rgba(238,244,244,.8)">contact@c-tech.me</a>
+          </p>
+        </div>
+        <div>
+          <h3>Pages</h3>
+          <div class="footer-links">
+            <a href="index.html">About</a>
+            <a href="solutions.html">Solutions</a>
+            <a href="products.html">Products</a>
+            <a href="case-studies.html">Case Studies</a>
+            <a href="team.html">Team</a>
+            <a href="contact.html">Contact</a>
+          </div>
+        </div>
+        <div>
+          <h3>Let's build smarter operations</h3>
+          <p style="color:rgba(238,244,244,.82)">
+            Senior, vendor-neutral consulting. Fixed scope. Fixed fee. No junior handoffs.
+          </p>
+          <div class="btn-group">
+            <a class="btn btn-primary" href="contact.html">Book a Consultation</a>
+          </div>
+        </div>
+      </div>
+      <hr class="sep">
+      <p style="margin-top:18px;color:rgba(238,244,244,.62)">© 2026 Cristal Technologies. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
