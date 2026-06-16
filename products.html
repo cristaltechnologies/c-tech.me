@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products | Cristal Technologies</title>
+  <meta name="description" content="Cristal Technologies operational dashboards — Sales & Operations, Warehouse, and Financial Dashboard — built on Power BI and Cognos for FMCG and distribution businesses.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* ── Products page extras ── */
+    .prod-hero-bg {
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 60%, #1a6b40 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .prod-hero-bg::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 80% at 90% 10%, rgba(184,196,0,.18), transparent),
+        radial-gradient(ellipse 40% 60% at 5% 90%, rgba(255,255,255,.06), transparent);
+      pointer-events: none;
+    }
+    .prod-hero-inner {
+      position: relative;
+      padding: 72px 0 60px;
+    }
+    .prod-hero-inner .eyebrow { color: var(--accent); }
+    .prod-hero-inner .eyebrow::before { background: linear-gradient(90deg, var(--accent), #fff); }
+    .prod-hero-inner h1 { color: #fff; font-size: clamp(2.2rem, 4.5vw, 3.4rem); margin-bottom: 14px; }
+    .prod-hero-inner .lead { color: rgba(255,255,255,.78); max-width: 60ch; }
+
+    /* Product cards */
+    .prod-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+      margin-top: 48px;
+    }
+    .prod-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .prod-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 28px 64px rgba(8,94,88,.14);
+    }
+    .prod-card-header {
+      padding: 28px 28px 20px;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .prod-card-icon {
+      width: 48px; height: 48px;
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 16px;
+    }
+    .prod-card-icon svg { width: 24px; height: 24px; }
+    .prod-card-num {
+      position: absolute;
+      top: 24px; right: 24px;
+      font-size: .72rem; font-weight: 800;
+      letter-spacing: .14em;
+      color: var(--muted);
+    }
+    .prod-card h3 {
+      font-size: 1.18rem; font-weight: 800;
+      color: var(--text); margin-bottom: 8px;
+    }
+    .prod-card .prod-tag {
+      display: inline-block;
+      font-size: .7rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      padding: 3px 11px; border-radius: 999px;
+      margin-bottom: 10px;
+    }
+    .prod-card p { font-size: .9rem; color: var(--muted); line-height: 1.65; margin: 0; }
+
+    /* Metrics strip inside card */
+    .prod-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--line);
+    }
+    .prod-metric {
+      padding: 14px 16px;
+      border-right: 1px solid var(--line);
+      text-align: center;
+    }
+    .prod-metric:last-child { border-right: none; }
+    .prod-metric-val {
+      font-size: 1.1rem; font-weight: 800;
+      color: var(--primary); display: block; line-height: 1;
+      margin-bottom: 3px;
+    }
+    .prod-metric-lbl {
+      font-size: .68rem; font-weight: 600;
+      letter-spacing: .06em; text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* Features list */
+    .prod-features {
+      padding: 20px 28px;
+      display: grid; gap: 9px;
+      flex: 1;
+    }
+    .prod-feature {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: .875rem; color: var(--text); line-height: 1.5;
+    }
+    .prod-feature-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      margin-top: 7px; flex-shrink: 0;
+    }
+
+    /* Preview iframe */
+    .prod-preview {
+      border-top: 1px solid var(--line);
+      background: var(--surface-soft);
+      position: relative;
+      overflow: hidden;
+      height: 220px;
+    }
+    .prod-preview iframe {
+      width: 200%; height: 200%;
+      transform: scale(.5);
+      transform-origin: top left;
+      border: none;
+      pointer-events: none;
+    }
+    .prod-preview-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 60%, rgba(255,255,255,.95) 100%);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 16px;
+    }
+
+    /* CTA footer of card */
+    .prod-card-foot {
+      padding: 18px 28px 24px;
+      display: flex; align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .prod-card-foot .prod-duration {
+      font-size: .8rem; color: var(--muted); font-weight: 600;
+    }
+
+    /* Full preview section */
+    .preview-section {
+      background: #f1f5f4;
+    }
+    .preview-tabs {
+      display: flex; gap: 6px;
+      margin-bottom: 0;
+      flex-wrap: wrap;
+    }
+    .preview-tab {
+      background: rgba(11,123,116,.08);
+      color: var(--primary);
+      border: 1px solid rgba(11,123,116,.15);
+      border-radius: 10px 10px 0 0;
+      padding: 10px 22px;
+      font-family: inherit; font-size: .875rem; font-weight: 700;
+      cursor: pointer; transition: .2s;
+      border-bottom: none;
+    }
+    .preview-tab.active, .preview-tab:hover {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+    .preview-frame-wrap {
+      background: #fff;
+      border: 2px solid var(--primary);
+      border-radius: 0 16px 16px 16px;
+      overflow: hidden;
+    }
+    .preview-panel { display: none; }
+    .preview-panel.active { display: block; }
+    .preview-panel iframe {
+      width: 100%; height: 700px;
+      border: none; display: block;
+    }
+
+    /* Dimension pills */
+    .dim-wrap {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin-top: 16px;
+    }
+    .dim-pill {
+      background: rgba(11,123,116,.07);
+      border: 1px solid rgba(11,123,116,.15);
+      color: var(--primary);
+      font-size: .75rem; font-weight: 700;
+      padding: 5px 13px; border-radius: 999px;
+      letter-spacing: .04em;
+    }
+
+    /* Colour themes per card */
+    .theme-sales   { --card-color: #0b7b74; --card-light: rgba(11,123,116,.08); }
+    .theme-wh      { --card-color: #2251c5; --card-light: rgba(34,81,197,.08);  }
+    .theme-fin     { --card-color: #7c3aed; --card-light: rgba(124,58,237,.08); }
+    .theme-expiry  { --card-color: #b8860b; --card-light: rgba(184,134,11,.08); }
+
+    @media (max-width: 900px) {
+      .prod-grid { grid-template-columns: 1fr; }
+      .preview-tabs { flex-direction: column; }
+      .preview-tab { border-radius: 10px; border: 1px solid rgba(11,123,116,.15); }
+      .preview-frame-wrap { border-radius: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html" aria-label="Cristal Technologies home">
+      <img src="assets/img/logo.jpg" alt="Cristal Technologies logo">
+      <div class="brand-meta">ERP • Logistics &amp; Distribution • BI</div>
+    </a>
+    <nav class="nav" aria-label="Primary navigation">
+      <a href="index.html">About</a>
+      <a href="solutions.html">Solutions</a>
+      <div class="nav-dropdown">
+        <a href="products.html" class="nav-dropdown-trigger active">Products <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="opacity:.6"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <div class="nav-dropdown-menu">
+          <a href="expiry-intelligence-platform.html">Expiry Intelligence Platform</a>
+          <a href="products.html">Warehouse Operational Dashboard</a>
+          <a href="products.html">Sales &amp; Operational Dashboard</a>
+          <a href="products.html">Financial Dashboard</a>
+        </div>
+      </div>
+      <a href="case-studies.html">Case Studies</a>
+      <a href="team.html">Team</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="prod-hero-bg">
+  <div class="container prod-hero-inner">
+    <span class="eyebrow">Products</span>
+    <h1>Operational Dashboards<br>Built for FMCG &amp; Distribution</h1>
+    <p class="lead">
+      Plug-and-play BI dashboards that connect to your ERP and deliver real-time
+      visibility across sales, warehousing, and finance — deployed in weeks, not months.
+    </p>
+    <div class="dim-wrap">
+      <span class="dim-pill" style="background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.25);color:#fff;">Power BI</span>
+      <span class="dim-pill" style="background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.25);color:#fff;">Cognos</span>
+      <span class="dim-pill" style="background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.25);color:#fff;">Oracle JD Edwards</span>
+      <span class="dim-pill" style="background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.25);color:#fff;">Oracle Fusion Cloud SCM</span>
+      <span class="dim-pill" style="background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.25);color:#fff;">Microsoft Dynamics 365</span>
+      <span class="dim-pill" style="background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.25);color:#fff;">INFOR WMS</span>
+      <span class="dim-pill" style="background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.25);color:#fff;">SAP</span>
+      <span class="dim-pill" style="background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.25);color:#fff;">Any ERP via API</span>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE PREVIEW -->
+<section class="section-sm preview-section">
+  <div class="container">
+    <span class="eyebrow">Live Demos</span>
+    <h2 style="margin-bottom:6px;">Preview the dashboards</h2>
+    <p class="lead" style="margin-bottom:24px;">Click any tab to explore each dashboard interactively.</p>
+
+    <!-- Auto-rotate progress bar -->
+    <div style="height:3px;background:rgba(11,123,116,.12);border-radius:2px;margin-bottom:6px;overflow:hidden;">
+      <div id="pvProgress" style="height:100%;width:0%;background:linear-gradient(90deg,var(--primary),var(--accent));transition:width linear;"></div>
+    </div>
+
+    <!-- Main tabs -->
+    <div class="preview-tabs" id="pvMainTabs">
+      <button class="preview-tab active" onclick="pvManual(this,0)">Sales &amp; Operational Dashboard</button>
+      <button class="preview-tab" onclick="pvManual(this,1)">Warehouse Operational Dashboard</button>
+      <button class="preview-tab" onclick="pvManual(this,2)">Financial Dashboard</button>
+    </div>
+
+    <!-- Financial sub-tabs (visible only when Financial tab is active) -->
+    <div id="pvSubTabs" style="display:none;flex-wrap:wrap;gap:4px;margin-bottom:0;padding:6px 0 0 0;">
+      <button class="preview-tab" style="font-size:.78rem;padding:6px 14px;border-radius:8px 8px 0 0;" onclick="pvSubManual(this,0)">Financial Statements</button>
+      <button class="preview-tab" style="font-size:.78rem;padding:6px 14px;border-radius:8px 8px 0 0;" onclick="pvSubManual(this,1)">Cash Flow</button>
+      <button class="preview-tab" style="font-size:.78rem;padding:6px 14px;border-radius:8px 8px 0 0;" onclick="pvSubManual(this,2)">AR Ageing</button>
+      <button class="preview-tab" style="font-size:.78rem;padding:6px 14px;border-radius:8px 8px 0 0;" onclick="pvSubManual(this,3)">AP Ageing</button>
+      <button class="preview-tab" style="font-size:.78rem;padding:6px 14px;border-radius:8px 8px 0 0;" onclick="pvSubManual(this,4)">Ratios &amp; KPIs</button>
+    </div>
+
+    <div class="preview-frame-wrap" style="border-top-left-radius:0;">
+      <div id="pv-sales" class="preview-panel active">
+        <iframe src="cristal_erp_dashboard.html" loading="lazy" title="Sales &amp; Operational Dashboard"></iframe>
+      </div>
+      <div id="pv-wh" class="preview-panel">
+        <iframe src="3pl_warehouse_bi_dashboard.html" loading="lazy" title="Warehouse Operational Dashboard"></iframe>
+      </div>
+      <div id="pv-fin" class="preview-panel">
+        <iframe id="pvFinFrame" src="cristal_technologies_erp_dashboard.html" loading="lazy" title="Financial Dashboard"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 PRODUCT CARDS -->
+<section class="section-sm">
+  <div class="container">
+    <span class="eyebrow">Dashboard Products</span>
+    <h2>Four products. One connected operational picture.</h2>
+    <p class="lead">Each product is standalone — deploy one, two, or all four. All connect to your existing ERP data with no rework of your systems.</p>
+
+    <div class="prod-grid">
+
+      <!-- CARD 1: Sales & Operations -->
+      <div class="prod-card theme-sales">
+        <div class="prod-card-header">
+          <div class="prod-card-icon" style="background:rgba(11,123,116,.1);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#0b7b74" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+            </svg>
+          </div>
+          <span class="prod-tag" style="background:rgba(11,123,116,.1);color:#0b7b74;">Sales &amp; Operations</span>
+          <h3>Sales &amp; Operational Dashboard Dashboard</h3>
+          <p>Real-time sales performance, target tracking, profitability, and distribution analytics across every dimension of your business.</p>
+        </div>
+        <div class="prod-metrics">
+          <div class="prod-metric">
+            <span class="prod-metric-val">9</span>
+            <span class="prod-metric-lbl">Dimensions</span>
+          </div>
+          <div class="prod-metric">
+            <span class="prod-metric-val">2</span>
+            <span class="prod-metric-lbl">Facts</span>
+          </div>
+          <div class="prod-metric">
+            <span class="prod-metric-val">2 wks</span>
+            <span class="prod-metric-lbl">Go-Live</span>
+          </div>
+        </div>
+        <div class="prod-features">
+          <div class="prod-feature"><div class="prod-feature-dot" style="background:#0b7b74;"></div>Sales vs target — value &amp; volume</div>
+          <div class="prod-feature"><div class="prod-feature-dot" style="background:#0b7b74;"></div>Gross margin &amp; net margin by category, brand, SKU</div>
+          <div class="prod-feature"><div class="prod-feature-dot" style="background:#0b7b74;"></div>Channel, district, and sales unit performance</div>
+          <div class="prod-feature"><div class="prod-feature-dot" style="background:#0b7b74;"></div>Customer ranking by revenue &amp; margin</div>
+          <div class="prod-feature"><div class="prod-feature-dot" style="background:#0b7b74;"></div>AI-powered Reporting Agents &amp; alerts</div>
+        </div>
+        <div class="dim-wrap" style="padding:0 28px 16px;">
+          <span class="dim-pill">Company</span>
+          <span class="dim-pill">Supplier</span>
+          <span class="dim-pill">Category</span>
+          <span class="dim-pill">Brand</span>
+          <span class="dim-pill">SKU</span>
+          <span class="dim-pill">District</span>
+          <span class="dim-pill">Channel</span>
+          <span class="dim-pill">Client</span>
+        </div>
+        <div class="prod-card-foot">
+          <span class="prod-duration">2 working weeks</span>
+          <a href="contact.html" class="btn btn-primary" style="font-family:inherit;font-size:.85rem;padding:10px 20px;">Request Demo</a>
+        </div>
+      </div>
+
+      <!-- CARD 2: Warehouse -->
+      <div class="prod-card theme-wh">
+        <div class="prod-card-header">
+          <div class="prod-card-icon" style="background:rgba(11,123,116,.1);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#0b7b74" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </div>
+          <span class="prod-tag" style="background:rgba(11,123,116,.1);color:#0b7b74;">Warehouse Operations</span>
+          <h3>Warehouse Operational Dashboard</h3>
+          <p>End-to-end warehouse visibility from inbound receipts to dispatch — cycle counts, inventory accuracy, and 3PL performance in one view.</p>
+        </div>
+        <div class="prod-metrics">
+          <div class="prod-metric">
+            <span class="prod-metric-val">7</span>
+            <span class="prod-metric-lbl">KPI Areas</span>
+          </div>
+          <div class="prod-metric">
+            <span class="prod-metric-val">Live</span>
+            <span class="prod-metric-lbl">Refresh</span>
+          </div>
+          <div class="prod-metric">
+            <span class="prod-metric-val">2 wks</span>
+            <span class="prod-metric-lbl">Go-Live</span>
+          </div>
+        </div>
+        <div class="prod-features">
+          <div class="prod-feature"><div class="prod-feature-dot" style="background:#0b7b74;"></div>Inbound receipts vs purchase orders</div>
+          <div class="prod-feature"><div class="prod-feature-dot" style="background:#0b7b74;"></div>Inventory accuracy &amp; cycle count results</div>
+          <div class="prod-feature"><div class="prod-feature-dot" style="background:#0b7b74;"></div>Pick, pack &amp; dispatch performance</div>
+          <div class="prod-feature"><div class="prod-feature-dot" style="background:#0b7b74;"></div>3PL throughput &amp; SLA tracking</div>
+          <div class="prod-feature"><div class="prod-feature-dot" style="background:#0b7b74;"></div>Slow-moving &amp; near-expiry alerts</div>
+        </div>
+        <div class="dim-wrap" style="padding:0 28px 16px;">
+          <span class="dim-pill" >Warehouse</span>
+          <span class="dim-pill" >Location</span>
+          <span class="dim-pill" >SKU</span>
+          <span class="dim-pill" >Supplier</span>
+          <span class="dim-pill" >Category</span>
+        </div>
+        <div class="prod-card-foot">
+          <span class="prod-duration">2 working weeks</span>
+          <a href="contact.html" class="btn btn-primary" style="font-family:inherit;font-size:.85rem;padding:10px 20px;">Request Demo</a>
+        </div>
+      </div>
+
+      <!-- CARD 3: Financial Dashboard -->
+      <div class="prod-card theme-fin">
+        <div class="prod-card-header">
+          <div class="prod-card-icon" style="background:rgba(11,123,116,.1);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#0b7b74" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
+            </svg>
+          </div>
+          <span class="prod-tag" style="background:rgba(11,123,116,.1);color:#0b7b74;">Financial Dashboard Intelligence</span>
+          <h3>Financial Dashboard Dashboard</h3>
+          <p>Executive P&amp;L visibility from net sales to net margin — gross profit, trade spend, COGS, and cash performance by entity and period.</p>
+        </div>
+        <div class="prod-metrics">
+          <div class="prod-metric">
+            <span class="prod-metric-val">P&amp;L</span>
+            <span class="prod-metric-lbl">Full Bridge</span>
+          </div>
+          <div class="prod-metric">
+            <span class="prod-metric-val">MTD</span>
+            <span class="prod-metric-lbl">/ YTD</span>
+          </div>
+          <div class="prod-metric">
+            <span class="prod-metric-val">2 wks</span>
+            <span class="prod-metric-lbl">Go-Live</span>
+          </div>
+        </div>
+        <div class="prod-features">
+          <div class="prod-feature"><div class="prod-feature-dot" style="background:#0b7b74;"></div>Gross margin &amp; net margin by company &amp; period</div>
+          <div class="prod-feature"><div class="prod-feature-dot" style="background:#0b7b74;"></div>P&amp;L waterfall — sales → COGS → gross profit → OpEx → net</div>
+          <div class="prod-feature"><div class="prod-feature-dot" style="background:#0b7b74;"></div>Trade spend analysis &amp; A&amp;P tracking</div>
+          <div class="prod-feature"><div class="prod-feature-dot" style="background:#0b7b74;"></div>Budget vs actual vs prior year</div>
+          <div class="prod-feature"><div class="prod-feature-dot" style="background:#0b7b74;"></div>Multi-entity consolidation &amp; currency</div>
+        </div>
+        <div class="dim-wrap" style="padding:0 28px 16px;">
+          <span class="dim-pill" >Legal Entity</span>
+          <span class="dim-pill" >Cost Centre</span>
+          <span class="dim-pill" >Period</span>
+          <span class="dim-pill" >Currency</span>
+        </div>
+        <div class="prod-card-foot">
+          <span class="prod-duration">2 working weeks</span>
+          <a href="contact.html" class="btn btn-primary" style="font-family:inherit;font-size:.85rem;padding:10px 20px;">Request Demo</a>
+        </div>
+      </div>
+
+      <!-- CARD 4: Expiry Intelligence Platform -->
+      <div class="prod-card theme-expiry">
+        <div class="prod-card-header">
+          <div class="prod-card-icon" style="background:rgba(184,134,11,.1);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#b8860b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <span class="prod-card-num">04</span>
+          <span class="prod-tag" style="background:rgba(184,134,11,.1);color:#b8860b;">Expiry Intelligence</span>
+          <h3>Expiry Intelligence Platform</h3>
+          <p>Real-time expiry tracking across every SKU and location — automated alerts, clearance pricing, and near-expiry risk management to eliminate waste and protect margin.</p>
+        </div>
+        <div class="prod-metrics">
+          <div class="prod-metric">
+            <span class="prod-metric-val">Live</span>
+            <span class="prod-metric-lbl">Alerts</span>
+          </div>
+          <div class="prod-metric">
+            <span class="prod-metric-val">100%</span>
+            <span class="prod-metric-lbl">SKU Coverage</span>
+          </div>
+          <div class="prod-metric">
+            <span class="prod-metric-val">2 wks</span>
+            <span class="prod-metric-lbl">Go-Live</span>
+          </div>
+        </div>
+        <div class="prod-features">
+          <div class="prod-feature"><div class="prod-feature-dot" style="background:#b8860b;"></div>Near-expiry &amp; expired stock tracking by SKU, batch &amp; location</div>
+          <div class="prod-feature"><div class="prod-feature-dot" style="background:#b8860b;"></div>Automated clearance pricing recommendations</div>
+          <div class="prod-feature"><div class="prod-feature-dot" style="background:#b8860b;"></div>Supplier return &amp; claim management workflows</div>
+          <div class="prod-feature"><div class="prod-feature-dot" style="background:#b8860b;"></div>Days-to-expiry risk heatmaps across warehouse &amp; retail</div>
+          <div class="prod-feature"><div class="prod-feature-dot" style="background:#b8860b;"></div>Waste cost reporting &amp; write-off trend analysis</div>
+        </div>
+        <div class="dim-wrap" style="padding:0 28px 16px;">
+          <span class="dim-pill">SKU</span>
+          <span class="dim-pill">Batch / Lot</span>
+          <span class="dim-pill">Location</span>
+          <span class="dim-pill">Supplier</span>
+          <span class="dim-pill">Brand</span>
+        </div>
+        <div class="prod-card-foot">
+          <span class="prod-duration">2 working weeks</span>
+          <a href="expiry-intelligence-platform.html" class="btn btn-primary" style="font-family:inherit;font-size:.85rem;padding:10px 20px;">View Platform</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- HOW WE DELIVER -->
+<section class="section-sm">
+  <div class="container">
+    <span class="eyebrow">Delivery Model</span>
+    <h2 style="margin-bottom:32px;">From kickoff to live in two weeks</h2>
+    <div class="grid grid-4" style="gap:20px;">
+      <div class="card" style="padding:24px;border-top:3px solid var(--primary);">
+        <div style="font-size:1.4rem;font-weight:800;color:var(--primary);margin-bottom:10px;">01</div>
+        <h4 style="font-size:.95rem;font-weight:700;margin-bottom:8px;">Connect</h4>
+        <p style="font-size:.875rem;color:var(--muted);margin:0;">ERP connection, data extraction, and dimension mapping against your chart of accounts.</p>
+      </div>
+      <div class="card" style="padding:24px;border-top:3px solid var(--primary);">
+        <div style="font-size:1.4rem;font-weight:800;color:var(--primary);margin-bottom:10px;">02</div>
+        <h4 style="font-size:.95rem;font-weight:700;margin-bottom:8px;">Configure</h4>
+        <p style="font-size:.875rem;color:var(--muted);margin:0;">Business logic, KPI definitions, and dashboard layout aligned to your reporting needs.</p>
+      </div>
+      <div class="card" style="padding:24px;border-top:3px solid var(--primary);">
+        <div style="font-size:1.4rem;font-weight:800;color:var(--primary);margin-bottom:10px;">03</div>
+        <h4 style="font-size:.95rem;font-weight:700;margin-bottom:8px;">Validate</h4>
+        <p style="font-size:.875rem;color:var(--muted);margin:0;">UAT with your team — numbers reconciled against ERP reports before go-live.</p>
+      </div>
+      <div class="card" style="padding:24px;border-top:3px solid var(--accent);">
+        <div style="font-size:1.4rem;font-weight:800;color:var(--accent);margin-bottom:10px;">04</div>
+        <h4 style="font-size:.95rem;font-weight:700;margin-bottom:8px;">Go Live</h4>
+        <p style="font-size:.875rem;color:var(--muted);margin:0;">Training, handover, and 30-day post-go-live support included as standard.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-sm">
+  <div class="container">
+    <div class="band">
+      <span class="eyebrow" style="color:#fff;">Get Started</span>
+      <h2>Ready to see your data in action?</h2>
+      <p>Book a 30-minute demo — we'll show you the dashboards running on sample FMCG data and discuss your specific reporting requirements.</p>
+      <div class="btn-group">
+        <a class="btn btn-primary" href="contact.html" style="font-family:inherit;">Book a Demo</a>
+        <a class="btn btn-secondary" href="solutions.html" style="font-family:inherit;">View All Solutions</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-card">
+      <div class="footer-grid">
+        <div>
+          <img class="logo-small" src="assets/img/logo.jpg" alt="Cristal Technologies logo">
+          <p style="margin-top:16px;color:rgba(238,244,244,.82)">
+            Independent enterprise consulting for ERP, Logistics &amp; Distribution, Demand Planning, BI &amp; Custom Systems Integration — serving the GCC and Levant.
+          </p>
+          <p style="margin-top:12px;color:rgba(238,244,244,.6);font-size:.85rem">
+            Freeway Center, Mirna Chalouhi Hwy, Sin El Fil, Lebanon<br>
+            <a href="tel:+96181030177" style="color:rgba(238,244,244,.8)">+961 81 030177</a> &nbsp;·&nbsp;
+            <a href="tel:+971506414205" style="color:rgba(238,244,244,.8)">+971 50 641 4205</a> &nbsp;·&nbsp;
+            <a href="mailto:contact@c-tech.me" style="color:rgba(238,244,244,.8)">contact@c-tech.me</a>
+          </p>
+        </div>
+        <div>
+          <h3>Pages</h3>
+          <div class="footer-links">
+            <a href="index.html">About</a>
+            <a href="solutions.html">Solutions</a>
+            <a href="products.html">Products</a>
+            <a href="case-studies.html">Case Studies</a>
+            <a href="team.html">Team</a>
+            <a href="contact.html">Contact</a>
+          </div>
+        </div>
+        <div>
+          <h3>Let's build smarter operations</h3>
+          <p style="color:rgba(238,244,244,.82)">
+            Senior, vendor-neutral consulting. Fixed scope. Fixed fee. No junior handoffs.
+          </p>
+          <div class="btn-group">
+            <a class="btn btn-primary" href="contact.html" style="font-family:inherit;">Book a Consultation</a>
+          </div>
+        </div>
+      </div>
+      <hr class="sep">
+      <p style="margin-top:18px;color:rgba(238,244,244,.62)">© 2026 Cristal Technologies. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Sequence: Sales, WH, Fin-Statements, Fin-CashFlow, Fin-AR, Fin-AP, Fin-Ratios, repeat
+var PV_DURATION = 8000;
+var PV_PANELS   = ['pv-sales', 'pv-wh', 'pv-fin', 'pv-fin', 'pv-fin', 'pv-fin', 'pv-fin'];
+var PV_MAIN_IDX = [0, 1, 2, 2, 2, 2, 2];  // which main tab is active
+var PV_SUB_IDX  = [-1, -1, 0, 1, 2, 3, 4]; // which sub-tab (-1 = none)
+var PV_FIN_HASH = ['#financial-statements', '#cash-flow', '#ar-ageing', '#ap-ageing', '#ratios-kpis'];
+
+var _pvCur = 0, _pvTimer, _pvAnim;
+
+function _pvActivate(seqIdx) {
+  var panelId  = PV_PANELS[seqIdx];
+  var mainIdx  = PV_MAIN_IDX[seqIdx];
+  var subIdx   = PV_SUB_IDX[seqIdx];
+
+  // Main tabs
+  var mainBtns = document.querySelectorAll('#pvMainTabs .preview-tab');
+  mainBtns.forEach(function(t,i){ t.classList.toggle('active', i === mainIdx); });
+
+  // Sub-tabs
+  var subWrap = document.getElementById('pvSubTabs');
+  var subBtns = subWrap.querySelectorAll('.preview-tab');
+  if (panelId === 'pv-fin') {
+    subWrap.style.display = 'flex';
+    subBtns.forEach(function(t,i){ t.classList.toggle('active', i === subIdx); });
+    // Update iframe hash to simulate panel navigation
+    var frame = document.getElementById('pvFinFrame');
+    if (frame) {
+      try {
+        frame.contentWindow.showTab(subIdx);
+      } catch(e) {
+        frame.addEventListener('load', function onLoad() {
+          frame.removeEventListener('load', onLoad);
+          try { frame.contentWindow.showTab(subIdx); } catch(e2) {}
+        }, { once: true });
+      }
+    }
+  } else {
+    subWrap.style.display = 'none';
+    subBtns.forEach(function(t){ t.classList.remove('active'); });
+  }
+
+  // Panels
+  document.querySelectorAll('.preview-panel').forEach(function(p){ p.classList.remove('active'); });
+  document.getElementById(panelId).classList.add('active');
+}
+
+function _pvProgress() {
+  var bar = document.getElementById('pvProgress');
+  if (!bar) return;
+  bar.style.transition = 'none'; bar.style.width = '0%';
+  requestAnimationFrame(function(){
+    requestAnimationFrame(function(){
+      bar.style.transition = 'width ' + PV_DURATION + 'ms linear';
+      bar.style.width = '100%';
+    });
+  });
+}
+
+function _pvNext() {
+  _pvCur = (_pvCur + 1) % PV_PANELS.length;
+  _pvActivate(_pvCur);
+  _pvProgress();
+  clearTimeout(_pvTimer);
+  _pvTimer = setTimeout(_pvNext, PV_DURATION);
+}
+
+function pvManual(btn, mainTabIdx) {
+  // Find first sequence entry that maps to this main tab
+  for (var i = 0; i < PV_MAIN_IDX.length; i++) {
+    if (PV_MAIN_IDX[i] === mainTabIdx && PV_SUB_IDX[i] === -1) { _pvCur = i; break; }
+    if (PV_MAIN_IDX[i] === mainTabIdx) { _pvCur = i; break; }
+  }
+  _pvActivate(_pvCur);
+  _pvProgress();
+  clearTimeout(_pvTimer);
+  _pvTimer = setTimeout(_pvNext, PV_DURATION);
+}
+
+function pvSubManual(btn, subIdx) {
+  // Find sequence entry for this sub-tab
+  for (var i = 0; i < PV_SUB_IDX.length; i++) {
+    if (PV_SUB_IDX[i] === subIdx) { _pvCur = i; break; }
+  }
+  _pvActivate(_pvCur);
+  _pvProgress();
+  clearTimeout(_pvTimer);
+  _pvTimer = setTimeout(_pvNext, PV_DURATION);
+}
+
+// Start on load
+document.addEventListener('DOMContentLoaded', function(){
+  _pvActivate(0);
+  _pvProgress();
+  _pvTimer = setTimeout(_pvNext, PV_DURATION);
+});
+</script>
+
+</body>
+</html>
